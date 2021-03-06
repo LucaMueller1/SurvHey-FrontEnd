@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
-import {Link, withRouter } from 'react-router-dom';
-
+import {Link} from 'react-router-dom';
 export function Nav() {
     const navStyle= {
         color: "white"
@@ -9,13 +8,10 @@ export function Nav() {
     
     return (
         <nav>
-            <h3>Logo</h3>
+            <h3>Welcome User</h3>
             <ul className="navLinks">
                 <Link style={navStyle} to="">
-                    <li>Home</li>
-                </Link>
-                <Link style={navStyle} to="/CreateSurvey">
-                    <li>CreateSurvey</li>
+                    <li style={navStyle}>Home</li>
                 </Link>
                 <Link style={navStyle}  to="/AnalyseSurvey">
                     <li>AnalyseSurvey</li>

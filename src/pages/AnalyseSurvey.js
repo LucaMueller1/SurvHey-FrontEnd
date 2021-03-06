@@ -2,7 +2,7 @@ import React from 'react';
 
  export function AnalyseSurvey() {
      return (
-        <h1>Analyse Me!</h1>
+        <h1>Analyse your SurvHey</h1>
      );
  }
 

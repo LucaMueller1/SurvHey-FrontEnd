@@ -1,13 +1,19 @@
 import React from 'react';
-import NativeSelects from '../components/nativeSelect';
-import DiscreteSlider from '../components/Skale';
+import logo from '../SurvHeyLogo.png';
+import Survey from '../components/Survey';
+
+
 
  export function Home() {
      return (
          <div>
-             <h1>Welcome to SurvHey!</h1>
-             <h3>Hi</h3>
-            
+             <div className="Greetings">
+                <h1>Welcome to SurvHey</h1>
+                <img className="HomeLogo"src={logo} alt="SurvHeyLogo"/>
+             </div>
+             <div className="SurveyBlocks">
+             <Survey/>
+             </div>
          </div>
         
      );

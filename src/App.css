@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  
+}
+body{
+  background-image: url(./Stift.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 100%;
+  color: white;
 }
 
  nav {
@@ -8,8 +17,9 @@
   align-items: center;
   min-height: 10vh;
   color: white;
-  background-color: rgb(105, 118, 165);
+  
 }
+ 
 .navLinks {
   width: 40%;
   display: flex;
@@ -18,6 +28,12 @@
   list-style: none;
 }
 
+input[type=text]{
+  width: 20%;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
 
 .App-logo {
   height: 40vmin;
@@ -53,3 +69,15 @@
     transform: rotate(360deg);
   }
 }
+
+.HomeLogo{
+  justify-content: left;
+  size: 50%;
+}
+
+/*.Logo {
+  background-image: url('./SurveyLogo.jpg');
+  display: inline-block;
+ 
+}
+*/

@@ -1,17 +1,15 @@
 import React from 'react';
-import NativeSelects from '../components/nativeSelect';
-import DiscreteSlider from '../components/Skale';
+import Survey from '../components/Survey';
 
  export function CreateSurvey() {
      return (
          <div>
-            <h1>Create Me!</h1>
-            <DiscreteSlider/>
-             <br></br>
-             <br></br>
-             <br></br>
-             <br></br>
-             <NativeSelects/>
+            <h1>Create your SurvHey</h1>
+            
+            <div>
+                <h3>Create your own Survey here:</h3>
+                <Survey/>
+            </div>
         </div>
      );
  }
