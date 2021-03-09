@@ -2,25 +2,25 @@ import React from 'react';
 
 class Survey extends React.Component {
 
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      toggle: "false",
+      toggle: false,
       selectedValue: ""
     };
-    this.toggleSurvey = this.toggleSurvey.bind(this);
+    this.openSurvey = this.openSurvey.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
   }
 
-  toggleSurvey(event){
+  openSurvey(event){
     this.setState({
-      toggle: this.event.target = "true"
+      toggle: event.target = true
     });
   }
 
-  onValueChange(event){
+  onValueChange = e => {
     this.setState({
-      selectedValue: this.event.target
+      selectedValue: e.target.value
     })
   }
 
@@ -43,17 +43,17 @@ class Survey extends React.Component {
     render() {
       const answers = this.props.answerOptions.map((answer, index) => {
         return (
-             <input key={index} id={index} type={this.props.surveyType} value={answer} onChange={this.onValueChange}/>
+          <label key={index}>
+             <input key={index} id={index} type="radio" value={answer.content} checked={this.state.selectedValue === answer.content} onChange={this.onValueChange}/>
+          {answer.content}</label>
         );
-      }
-
-      )
+        });
 
       if(this.state.toggle === false){
         return(
           <div>
             <h3>{this.props.surveyName}</h3>
-            <button onClick={this.toggleSurvey}>openSurvey</button>
+            <button onClick={this.openSurvey}>openSurvey</button>
           </div>
         );
       }
@@ -61,9 +61,12 @@ class Survey extends React.Component {
             <form>
               <h3>{this.props.surveyName}</h3>
               <h4>{this.props.questionText}</h4>
-              {answers}
+              <div>
+                {answers}
+                <p>Your answer is: {this.state.selectedValue}</p>
+              </div>
               <button className="btn btn-default" type="submit" onClick={this.formSubmit}>
-              Submit Survey
+              Send Answer
               </button>
           </form>
         )
