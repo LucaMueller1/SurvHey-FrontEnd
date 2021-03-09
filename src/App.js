@@ -6,6 +6,8 @@ import {AnalyseSurvey} from './pages/AnalyseSurvey';
 import {Nav} from './components/Nav';
 import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Home} from './pages/home';
+import SurveyIFrame from './components/surveyIFrame';
+import CreateSurvey from './pages/CreateSurvey';
 
 
 function App() {
@@ -15,10 +17,11 @@ function App() {
         <Nav/>
         <div className="App" >
             <Switch>
-              <Route path="/" exact component={Home}/>S
+              <Route path="/" exact component={Home}/>
+              <Route path="/CreateSurvey" component={CreateSurvey} />
               <Route path="/ExportSurvey" component={ExportSurvey} />
               <Route path="/AnalyseSurvey" component={AnalyseSurvey}/>
-              <Route path="/Survey/:id"/>
+              <Route path="/Survey/:id" component={SurveyIFrame}/>
             </Switch>
         </div>
       </Router>

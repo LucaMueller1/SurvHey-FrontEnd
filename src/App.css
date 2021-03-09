@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
+
 .App {
   text-align: center;
   
@@ -7,8 +9,9 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  background-size: 100%;
+  background-size: 100% 100%;
   color: white;
+  font-family: 'Alegreya', serif;
 }
 
  nav {
@@ -34,6 +37,8 @@ input[type=text]{
   margin: 8px 0;
   box-sizing: border-box;
 }
+
+
 
 .App-logo {
   height: 40vmin;
