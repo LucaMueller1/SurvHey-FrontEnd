@@ -24,7 +24,7 @@ class SurveyCreator extends React.Component {
   }
   
   //gets called when submitting the form
-  formSubmit(event) {
+  formSubmit = (event) => {
     event.preventDefault();
     alert("Survey was Submited sucessfull");
     //Post Data to API in here
@@ -108,7 +108,7 @@ class SurveyCreator extends React.Component {
       <div>
         <h3>{this.state.surveyName}</h3>
         <h3>{this.state.questionText}</h3>
-        <label>Enter a answer Option</label>
+        <label>Enter an answer Option</label>
         <input type="text" onChange={this.saveInput}></input>
         <button onClick={this.addNewItem}> Add answer </button>
         <br></br>

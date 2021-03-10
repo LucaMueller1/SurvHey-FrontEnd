@@ -1,12 +1,14 @@
 import React from 'react';
+import { requestService } from '../services/requestService';
 
 class Survey extends React.Component {
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       toggle: false,
-      selectedValue: ""
+      selectedValue: "",
+      id: props.id
     };
     this.openSurvey = this.openSurvey.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
@@ -25,23 +27,18 @@ class Survey extends React.Component {
   }
 
 
-  formSubmit(event){
-    console.log("submit");
+  formSubmit = event => {
+    alert("answer submitted");
+    event.preventDefault();
+    console.log(this.state.id);
+    requestService.postSubmisson(this.props.id, this.state.selectedValue);
+    console.log("submisson posted")
+    
   }
-  
-                /* <h3>{this.props.questionText}</h3>
-              {this.props.answerOptions.map(opt => {
-                return (
-                  <div>
-                    <input key={opt} id={opt} type={this.props.surveyTyp} value={opt} onChange={this.onValueChange} />
-                    <label for="opt">{opt}</label>
-                  </div>
-                )
-              })}
-              */
 
     render() {
-      const answers = this.props.answerOptions.map((answer, index) => {
+    
+    const answers = this.props.answerOptions.map((answer, index) => {
         return (
           <label key={index}>
              <input key={index} id={index} type="radio" value={answer.content} checked={this.state.selectedValue === answer.content} onChange={this.onValueChange}/>
@@ -58,14 +55,14 @@ class Survey extends React.Component {
         );
       }
        else { return(
-            <form>
+            <form onSubmit={this.formSubmit}>
               <h3>{this.props.surveyName}</h3>
               <h4>{this.props.questionText}</h4>
               <div>
                 {answers}
                 <p>Your answer is: {this.state.selectedValue}</p>
               </div>
-              <button className="btn btn-default" type="submit" onClick={this.formSubmit}>
+              <button className="btn btn-default" type="submit">
               Send Answer
               </button>
           </form>

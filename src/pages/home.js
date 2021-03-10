@@ -35,7 +35,7 @@ export function Home() {
     if (surveyList) {
         SurveysToRender = surveyList.map(( survey, index) => {
             return(
-                <Survey key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.answerMode} answerOptions={survey.answerOptions}/>
+                <Survey id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.answerMode} answerOptions={survey.answerOptions}/>
                 );
             })
         } else {
