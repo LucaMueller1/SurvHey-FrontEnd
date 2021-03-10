@@ -2,27 +2,37 @@ import React, { useEffect, useState } from 'react';
 import logo from '../SurvHeyLogo.png';
 import { requestService } from '../services/requestService';
 import Survey from '../components/Survey';
+import { AuthService } from '../services/authService';
+import { AuthInterceptor } from '../services/AuthInterceptor';
 
 export function Home() {
     const [surveyList, setSurveyList] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsError(false);
-            setIsLoading(true);
+    const fetchData = async () => {
+        setIsError(false);
+        setIsLoading(true);
+
         try {
-          const result = await requestService.getSurveys();
-     
-          setSurveyList(result.data);
+            const result = await requestService.getSurveys();
+ 
+            setSurveyList(result.data);
         } catch (error) {
             setIsError(true);
         }
+        
         setIsLoading(false);
     };
-     
-        fetchData();
+
+    useEffect(() => {
+        AuthInterceptor.intercept();
+        //check if authenticated
+        if(!AuthService.getToken()) {
+            AuthService.authenticate("60WeYEQw@m.ceit", "lol123");
+        } else {
+            fetchData();
+        }
       }, []);
 
     console.log(surveyList);
