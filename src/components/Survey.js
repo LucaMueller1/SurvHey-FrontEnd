@@ -1,5 +1,8 @@
 import React from 'react';
 import { requestService } from '../services/requestService';
+import { Button} from '@material-ui/core';
+import Radio from '@material-ui/core/Radio';
+
 
 class Survey extends React.Component {
 
@@ -26,6 +29,12 @@ class Survey extends React.Component {
     })
   }
 
+  getResults = e => {
+    const results1 = requestService.getResults(this.state.id);
+    const Results = results1.data;
+    console.log(Results);
+  }
+
 
   formSubmit = event => {
     alert("answer submitted");
@@ -42,7 +51,9 @@ class Survey extends React.Component {
         return (
           <label key={index}>
              <input key={index} id={index} type="radio" value={answer.content} checked={this.state.selectedValue === answer.content} onChange={this.onValueChange}/>
-          {answer.content}</label>
+          {answer.content}
+           <br></br>
+          </label>
         );
         });
 
@@ -50,7 +61,7 @@ class Survey extends React.Component {
         return(
           <div>
             <h3>{this.props.surveyName}</h3>
-            <button onClick={this.openSurvey}>openSurvey</button>
+            <Button variant="contained" onClick={this.openSurvey}>Show full Survey</Button>
           </div>
         );
       }
@@ -62,9 +73,8 @@ class Survey extends React.Component {
                 {answers}
                 <p>Your answer is: {this.state.selectedValue}</p>
               </div>
-              <button className="btn btn-default" type="submit">
-              Send Answer
-              </button>
+              <Button variant="contained" color="primary" type="submit">Send Answer</Button>
+              <Button variant="contained" onClick={this.getResults}>Show Results</Button>
           </form>
         )
       }

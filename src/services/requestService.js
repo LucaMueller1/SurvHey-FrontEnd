@@ -48,6 +48,9 @@ export class requestService {
 
         return axios.post(environment.backEndUrl +"/survey/" + surveyId + "/submisson",jsonBody,{headers: {"Accept": "application/json"}});
     }
+    static async getResults(id) {
+        return axios.get(environment.backEndUrl + "/survey/" + id + "/results", {headers: {"Accept": "application/json"}});       
+      }
 
     static async getSurveyById(id) {
       return axios.get(environment.backEndUrl + "/survey/" + id, {headers: {"Accept": "application/json"}});       

@@ -4,6 +4,7 @@ import { requestService } from '../services/requestService';
 import Survey from '../components/Survey';
 import { AuthService } from '../services/authService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
+import { Typography} from '@material-ui/core';
 
 export function Home() {
     const [surveyList, setSurveyList] = useState([]);
@@ -45,7 +46,7 @@ export function Home() {
                 );
             })
         } else {
-            SurveysToRender = "Loading...";
+            SurveysToRender = "No Surveys found. Please start by creating one...";
         }
 
     console.log(surveyList);
