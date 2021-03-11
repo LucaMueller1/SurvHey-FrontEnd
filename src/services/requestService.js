@@ -11,6 +11,16 @@ export class requestService {
         return axios.post(environment.backEndUrl + "/user/login", jsonBody, {headers: {"Accept": "application/json"}})
     }
 
+    static async createUser(email, password, lastName, firstName) {
+        let jsonBody = {
+            "email": email,
+            "password": password,
+            "lastName": lastName,
+            "firstName": firstName
+        }
+        return axios.post(environment.backEndUrl + "/user", jsonBody, {headers: {"Accept": "application/json"}})
+    }
+
     static async postSurvey(surveyName, questionText, surveyTyp, answerOptions){
         let answers = this.toAnswerOptionJson(answerOptions);
         let jsonBody = {
@@ -26,7 +36,7 @@ export class requestService {
     static async postSubmisson(surveyId, selectedValue){
         let jsonBody = {
            "surveyId": surveyId,
-           "ipAdress": null,
+           "ipAdress": "92.67.123.56",
             "choices": [
                 {
                   "id": 0,

@@ -1,5 +1,8 @@
 import React from 'react';
 import { requestService } from '../services/requestService';
+import { Button, FormControl, Radio, RadioGroup, FormLabel, FormControlLabel} from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
+import { Fragment } from 'react';
 //import Radio from '@material-ui/core/Radio';
 //import {exportSurveyData} from '../services/exportSurveyData'
 
@@ -70,7 +73,7 @@ class SurveyCreator extends React.Component {
       return(
       <div>
         <h3>Create your own Survey!</h3>
-        <button onClick={this.switchPhase}>Create!</button>
+        <Button variant="contained" onClick={this.switchPhase}>Create!</Button>
       </div>
       )
     }
@@ -80,7 +83,7 @@ class SurveyCreator extends React.Component {
       return (
         <div>
           <input type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
-          <button onClick={this.switchPhase}>Continue</button>
+          <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
         </div>
       );
     }
@@ -96,9 +99,8 @@ class SurveyCreator extends React.Component {
           <option value={this.state.surveyTyp}>{this.state.surveyTyp}</option>
         </select>
         <br></br>
-        <button onClick={this.switchPhase}>
-          Continue
-        </button>
+
+        <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
       </div>
      
     );}
@@ -110,17 +112,22 @@ class SurveyCreator extends React.Component {
         <h3>{this.state.questionText}</h3>
         <label>Enter an answer Option</label>
         <input type="text" onChange={this.saveInput}></input>
-        <button onClick={this.addNewItem}> Add answer </button>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Icon>add_circle</Icon>}
+          onClick={this.addNewItem}
+        >
+          Add answer
+      </Button>
         <br></br>
         <label>Your answers:</label>
-        <ul>
+        <ol>
           {this.state.answerOptions.map((subItems, sIndex) => {
             return <li key={sIndex}> {subItems}</li>
           })}
-        </ul>
-        <button className="btn btn-default" onClick={this.switchPhase}>
-          Show full Survey
-        </button>
+        </ol>
+        <Button variant="contained" onClick={this.switchPhase}>Show Survey</Button>
         </div>
      
     );}
@@ -140,9 +147,7 @@ class SurveyCreator extends React.Component {
               </div>
             )
           })}
-          <button className="btn btn-default" type="submit" onClick={this.formSubmit}>
-          Submit Survey
-          </button>
+          <Button variant="contained" color="primary" type="submit" onClick={this.formSubmit}>Submit Survey</Button>
         </form>
       );
     }

@@ -26,21 +26,17 @@ export function Home() {
     };
 
     useEffect(() => {
+        requestService.createUser("Ka@rotte.de", "hallo","nic","karro");
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {
-            AuthService.authenticate("60WeYEQw@m.ceit", "lol123");
+            AuthService.authenticate("Ka@rotte.de", "hallo");
         } else {
             fetchData();
         }
       }, []);
 
     console.log(surveyList);
-    //Logik for return JSX Survey:
-    /*
-        <Survey key={index} surveyName={survey.surveyName} questionText={survey.questionText} surveyType={survey.surveyType} 
-        answeroptions={survey.answerOptions}  />
-    */
     let SurveysToRender;
     if (surveyList) {
         SurveysToRender = surveyList.map(( survey, index) => {
