@@ -75,9 +75,8 @@ input[type=text]{
   }
 }
 
-.HomeLogo{
-  justify-content: left;
-  size: 50%;
+ img .HomeLogo {
+  size: 50% 50%;
 }
 
 /**.Logo {

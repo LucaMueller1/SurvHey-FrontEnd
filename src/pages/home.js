@@ -32,7 +32,7 @@ export function Home() {
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {
-            AuthService.authenticate("ni@co.de", "123");
+            document.location.href="/login";
         } else {
             fetchData();
         }
@@ -54,9 +54,7 @@ export function Home() {
     
     return (
             <div>
-                <div className="Greetings">
-                    <img className="HomeLogo"src={logo} alt="SurvHeyLogo"/>
-                </div>
+                <img className="HomeLogo"src={logo} alt="SurvHeyLogo"/>
                 <div className="SurveyList">
                     <h2>My Surveys: </h2>
                     <h3>Find your created Surveys down below: </h3> 

@@ -9,6 +9,7 @@ export class AuthService {
           if(res.data) {
               console.log("Setting auth-token");
               this.setToken(res.data.authKey);
+              document.location.href="/";
           }
       }).catch(error => {
         console.log("Error during authentication");

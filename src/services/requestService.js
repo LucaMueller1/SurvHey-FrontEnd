@@ -31,7 +31,7 @@ export class requestService {
             "answerOptions": answers
         };
         return axios.post(environment.backEndUrl + "/survey",jsonBody,{headers: {"Accept": "application/json"}});
-        //auth token to be added 
+        
     }
 
     static async postSubmisson(surveyId, selectedAnswerId){

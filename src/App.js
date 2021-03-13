@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 //import {CreateSurvey} from './pages/CreateSurvey';
 import {ExportSurvey} from './pages/ExportSurvey';
@@ -8,13 +8,18 @@ import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {Home} from './pages/home';
 import SurveyIFrame from './components/surveyIFrame';
 import CreateSurvey from './pages/CreateSurvey';
+import Login from '../src/pages/login';
+import { AuthService } from './services/authService';
+import SignInSide from '../src/pages/login';
 
 
 function App() {
+  
+  
   return (
     <div>
       <Router>
-        <Nav/>
+      <Nav/>
         <div className="App" >
             <Switch>
               <Route path="/" exact component={Home}/>
@@ -22,6 +27,7 @@ function App() {
               <Route path="/ExportSurvey" component={ExportSurvey} />
               <Route path="/AnalyseSurvey" component={AnalyseSurvey}/>
               <Route path="/Survey/:id" component={SurveyIFrame}/>
+              <Route path="/login" component={SignInSide}/>
             </Switch>
         </div>
       </Router>
