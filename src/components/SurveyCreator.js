@@ -148,6 +148,7 @@ class SurveyCreator extends React.Component {
             )
           })}
           <Button variant="contained" color="primary" type="submit" onClick={this.formSubmit}>Submit Survey</Button>
+          <Button variant="contained" onClick={this.getResults}>Show Results</Button>
         </form>
       );
     }

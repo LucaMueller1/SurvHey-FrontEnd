@@ -31,7 +31,7 @@ export function Home() {
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {
-            AuthService.authenticate("Ka@rotte.de", "hallo");
+            AuthService.authenticate("ni@co.de", "123");
         } else {
             fetchData();
         }
@@ -54,7 +54,6 @@ export function Home() {
     return (
             <div>
                 <div className="Greetings">
-                    <h1>Welcome to SurvHey</h1>
                     <img className="HomeLogo"src={logo} alt="SurvHeyLogo"/>
                 </div>
                 <div className="SurveyList">
