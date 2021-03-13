@@ -10,7 +10,7 @@ class Survey extends React.Component {
     super(props);
     this.state = {
       toggle: false,
-      selectedValue: "",
+      selectedAnswerId: -1,
       id: props.id
     };
     this.openSurvey = this.openSurvey.bind(this);
@@ -24,15 +24,17 @@ class Survey extends React.Component {
   }
 
   onValueChange = e => {
+    console.log("value: " + e.target.value);
     this.setState({
-      selectedValue: e.target.value
+      selectedAnswerId: e.target.value
     })
   }
 
   getResults = e => {
-    const results1 = requestService.getResults(this.state.id);
-    const Results = results1.data;
-    console.log(Results);
+    const results1 = requestService.getResults(this.state.id).then(res => {
+      console.log("results: ");
+      console.log(res.data);
+    });
   }
 
 
@@ -40,8 +42,10 @@ class Survey extends React.Component {
     alert("answer submitted");
     event.preventDefault();
     console.log(this.state.id);
-    requestService.postSubmisson(this.props.id, this.state.selectedValue);
-    console.log("submisson posted")
+    // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
+
+    requestService.postSubmisson(this.props.id, 1);
+    console.log("submisson posted");
     
   }
 
@@ -71,7 +75,7 @@ class Survey extends React.Component {
               <h4>{this.props.questionText}</h4>
               <div>
                 {answers}
-                <p>Your answer is: {this.state.selectedValue}</p>
+                <p>Your answer-id is: {this.state.selectedAnswerId}</p>
               </div>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
               <Button variant="contained" onClick={this.getResults}>Show Results</Button>

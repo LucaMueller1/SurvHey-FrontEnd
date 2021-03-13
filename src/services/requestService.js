@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {environment} from '../environments/environment';
+import { trackingService } from './trackingService';
 
 export class requestService {
 
@@ -33,20 +34,21 @@ export class requestService {
         //auth token to be added 
     }
 
-    static async postSubmisson(surveyId, selectedValue){
+    static async postSubmisson(surveyId, selectedAnswerId){
+        let ip = await trackingService.getClientIp();
+
         let jsonBody = {
            "surveyId": surveyId,
-           "ipAdress": "92.67.123.56",
+           "ipAddress": ip,
             "choices": [
                 {
-                  "id": 0,
-                  "surveyId": surveyId,
-                  "content": selectedValue
+                  "id": selectedAnswerId
                 }
-              ]            
+              ]
         }
-
-        return axios.post(environment.backEndUrl +"/survey/" + surveyId + "/submisson",jsonBody,{headers: {"Accept": "application/json"}});
+        console.log(jsonBody);
+        return axios.post(environment.backEndUrl + "/survey/" + surveyId + "/submission", jsonBody, {headers: {"Content-Type": "application/json"}});
+        
     }
     static async getResults(id) {
         return axios.get(environment.backEndUrl + "/survey/" + id + "/results", {headers: {"Accept": "application/json"}});       
