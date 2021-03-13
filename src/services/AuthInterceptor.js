@@ -12,8 +12,9 @@ export class AuthInterceptor {
 
             if (error.response && error.response.status) {
                 if(error.response.status === 401) {
+                    console.log("Auth_Key not valid. Removing key...")
                     AuthService.removeToken();
-                    //document.location.href = "/tab1";
+                    //document.location.href = "/login";
                 }
             } else {
                 console.log(error.message);
