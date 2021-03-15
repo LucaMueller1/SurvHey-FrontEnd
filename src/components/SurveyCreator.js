@@ -28,9 +28,7 @@ class SurveyCreator extends React.Component {
   
   //gets called when submitting the form
   formSubmit = (event) => {
-    event.preventDefault();
     alert("Survey was Submited sucessfull");
-    //Post Data to API in here
     requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.surveyTyp,this.state.answerOptions);
   }
   onValueChange(event) {
@@ -122,11 +120,9 @@ class SurveyCreator extends React.Component {
       </Button>
         <br></br>
         <label>Your answers:</label>
-        <ol>
           {this.state.answerOptions.map((subItems, sIndex) => {
-            return <li key={sIndex}> {subItems}</li>
+            return <div key={sIndex}> {subItems} </div>
           })}
-        </ol>
         <Button variant="contained" onClick={this.switchPhase}>Show Survey</Button>
         </div>
      
@@ -142,8 +138,11 @@ class SurveyCreator extends React.Component {
           {this.state.answerOptions.map((opt, index) => {
             return (
               <div>
-                <input id={opt} type={this.state.surveyTyp} key={index} value={opt} onChange={this.onValueChange} />
-                <label key={index}for="opt">{opt}</label>
+                <label>
+                <input id={opt} type={this.state.surveyTyp} key={index} value={opt} checked={this.state.selectedValue === opt} onChange={this.onValueChange} />
+                {opt}
+                </label>
+                
               </div>
             )
           })}
