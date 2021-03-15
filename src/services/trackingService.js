@@ -10,4 +10,12 @@ export class trackingService {
         });
     }
 
+    static getTrackingToken() {
+        return localStorage.getItem("tracking");
+    }
+
+    static setTrackingToken(trackingToken) {
+        localStorage.setItem("tracking", trackingToken);
+    }
+
 }

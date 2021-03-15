@@ -36,10 +36,14 @@ export class requestService {
 
     static async postSubmisson(surveyId, selectedAnswerId){
         let ip = await trackingService.getClientIp();
+        let trackingToken = trackingService.getTrackingToken();
 
         let jsonBody = {
            "surveyId": surveyId,
-           "ipAddress": ip,
+           "participant": {
+                "IP": ip,
+                "Cookie": trackingToken
+           },
             "choices": [
                 {
                   "id": selectedAnswerId
@@ -47,7 +51,14 @@ export class requestService {
               ]
         }
         console.log(jsonBody);
-        return axios.post(environment.backEndUrl + "/survey/" + surveyId + "/submission", jsonBody, {headers: {"Content-Type": "application/json"}});
+        return axios.post(environment.backEndUrl + "/survey/" + surveyId + "/submission", jsonBody, {headers: {"Content-Type": "application/json"}}).then(res => {
+            if(res.data) {
+                console.log("Setting trackingToken to: " + res.data.participant.Cookie);
+                trackingService.setTrackingToken(res.data.participant.Cookie);
+            }
+        }).catch(error => {
+            console.log("Failed send submission");
+        });
         
     }
     static async getResults(id) {
