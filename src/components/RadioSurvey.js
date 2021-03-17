@@ -4,7 +4,7 @@ import { Button} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 
 
-class Survey extends React.Component {
+class RadioSurvey extends React.Component {
 
   constructor(props) {
     super(props);
@@ -44,7 +44,7 @@ class Survey extends React.Component {
     console.log(this.state.id);
     // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
 
-    requestService.postSubmisson(this.props.id, 1);
+    requestService.postSubmisson(this.props.id, [1]);
     console.log("submisson posted");
     
   }
@@ -81,7 +81,7 @@ class Survey extends React.Component {
               <h4>{this.props.questionText}</h4>
               <div>
                 {answers}
-                <p>Your answer-id is: {this.state.selectedAnswerId}</p>
+                <p>Your answer is: {this.state.selectedAnswerId}</p>
               </div>
                <div>
                 {SurveyResults}
@@ -96,4 +96,4 @@ class Survey extends React.Component {
   }
   
 
-  export default Survey;
+  export default RadioSurvey;

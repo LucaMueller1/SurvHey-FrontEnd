@@ -34,9 +34,10 @@ export class requestService {
         
     }
 
-    static async postSubmisson(surveyId, selectedAnswerId){
+    static async postSubmisson(surveyId, selectedAnswerIDs){
         let ip = await trackingService.getClientIp();
         let trackingToken = trackingService.getTrackingToken();
+        let answerOptionIDs = this.toAnswerOptionIDs(selectedAnswerIDs);
 
         let jsonBody = {
            "surveyId": surveyId,
@@ -44,12 +45,9 @@ export class requestService {
                 "IP": ip,
                 "Cookie": trackingToken
            },
-            "choices": [
-                {
-                  "id": selectedAnswerId
-                }
-              ]
+            "choices": answerOptionIDs
         }
+
         console.log(jsonBody);
         return axios.post(environment.backEndUrl + "/survey/" + surveyId + "/submission", jsonBody, {headers: {"Content-Type": "application/json"}}).then(res => {
             if(res.data) {
@@ -79,6 +77,14 @@ export class requestService {
            list2.push({"content": element});
         });
        return list2;
+    }
+
+    static toAnswerOptionIDs(list) {
+        let rList = [];
+        list.forEach(function(element){
+            rList.push({"id": element});
+        });
+        return rList;
     }
 
 }

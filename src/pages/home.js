@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import logo from '../SurvHeyLogo.png';
 import { requestService } from '../services/requestService';
-import Survey from '../components/Survey';
+import RadioSurvey from '../components/RadioSurvey';
 import { AuthService } from '../services/authService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 import { Typography} from '@material-ui/core';
@@ -41,7 +41,7 @@ export function Home() {
     if (surveyList) {
         SurveysToRender = surveyList.map(( survey, index) => {
             return(
-                <Survey id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.answerMode} answerOptions={survey.answerOptions}/>
+                <RadioSurvey id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.answerMode} answerOptions={survey.answerOptions}/>
                 );
             })
         } else {

@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { requestService } from "../services/requestService";
-import Survey from './Survey';
+import RadioSurvey from './RadioSurvey';
 
 
 // Survey true/false = null abfragen dann Logik implementieren
@@ -31,7 +31,7 @@ export function SurveyIFrame() {
     
     return (
         <div>
-            <Survey/>
+            <RadioSurvey/>
         </div>
     
     );
