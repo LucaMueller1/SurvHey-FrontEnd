@@ -27,8 +27,6 @@ export function Home() {
     };
 
     useEffect(() => {
-        requestService.createUser("Ka@rotte.de", "hallo","nic","karro");
-        
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {

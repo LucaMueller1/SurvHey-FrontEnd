@@ -25,7 +25,7 @@ function App() {
               <Route path="/" exact component={Home}/>
               <Route path="/CreateSurvey" component={CreateSurvey} />
               <Route path="/ExportSurvey" component={ExportSurvey} />
-              <Route path="/AnalyseSurvey" component={AnalyseSurvey}/>
+              <Route path="/AnalyseSurvey/:id" component={AnalyseSurvey}/>
               <Route path="/Survey/:id" component={SurveyIFrame}/>
               <Route path="/login" component={SignInSide}/>
             </Switch>

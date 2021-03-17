@@ -50,6 +50,12 @@ class Survey extends React.Component {
   }
 
     render() {
+    const SurveyResults = "";
+    if(this.getResults()){
+      return(
+        <div>Results</div>
+      );
+    }
     
     const answers = this.props.answerOptions.map((answer, index) => {
         return (
@@ -77,8 +83,11 @@ class Survey extends React.Component {
                 {answers}
                 <p>Your answer-id is: {this.state.selectedAnswerId}</p>
               </div>
+               <div>
+                {SurveyResults}
+               </div>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
-              <Button variant="contained" onClick={this.getResults}>Show Results</Button>
+              <Button variant="contained" onClick={this.getResults}>Analyse Survey</Button>
           </form>
         )
       }

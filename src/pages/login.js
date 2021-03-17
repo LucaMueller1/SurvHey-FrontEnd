@@ -72,7 +72,7 @@ export default function SignInSide() {
 
   const handlelogin  = e => {
       console.log("login");
-      AuthService.authenticate(email, password);
+      AuthService.authenticate(email, password)
   };
 
   const handleRegistration  = e => {
