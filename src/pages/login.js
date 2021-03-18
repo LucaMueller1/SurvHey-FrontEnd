@@ -71,14 +71,21 @@ export default function SignInSide() {
   const [registered, setRegistered] = useState(true);
 
   const handlelogin  = e => {
+      e.preventDefault();
       console.log("login");
-      AuthService.authenticate(email, password)
+      AuthService.authenticate(email, password);
   };
 
   const handleRegistration  = e => {
+    e.preventDefault();
     console.log("registrating");
-    requestService.createUser(email, password, lastName, firstName);
-    setRegistered(true);
+    requestService.createUser(email, password, lastName, firstName).then(res => {
+      console.log("User created");
+      //setRegistered(true);
+    }).catch(error => {
+      console.log(error);
+      console.log("Error while creating user");
+    });
 };
 
   const onEmailChange = e => {
