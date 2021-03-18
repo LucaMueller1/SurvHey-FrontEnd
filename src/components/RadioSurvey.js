@@ -31,10 +31,7 @@ class RadioSurvey extends React.Component {
   }
 
   getResults = e => {
-    const results1 = requestService.getResults(this.state.id).then(res => {
-      console.log("results: ");
-      console.log(res.data);
-    });
+    document.location.href="/AnalyseSurvey/" + this.props.id;
   }
 
 
@@ -44,18 +41,12 @@ class RadioSurvey extends React.Component {
     console.log(this.state.id);
     // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
 
-    requestService.postSubmisson(this.props.id, [1]);
+    requestService.postSubmisson(this.props.id, [5]);
     console.log("submisson posted");
     
   }
 
     render() {
-    const SurveyResults = "";
-    if(this.getResults()){
-      return(
-        <div>Results</div>
-      );
-    }
     
     const answers = this.props.answerOptions.map((answer, index) => {
         return (
@@ -84,7 +75,6 @@ class RadioSurvey extends React.Component {
                 <p>Your answer is: {this.state.selectedAnswerId}</p>
               </div>
                <div>
-                {SurveyResults}
                </div>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
               <Button variant="contained" onClick={this.getResults}>Analyse Survey</Button>

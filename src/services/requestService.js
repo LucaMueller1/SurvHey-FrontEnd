@@ -63,6 +63,10 @@ export class requestService {
         return axios.get(environment.backEndUrl + "/survey/" + id + "/results", {headers: {"Accept": "application/json"}});       
       }
 
+      static async getAnalysis(id) {
+        return axios.get(environment.backEndUrl + "/survey/" + id + "/analysis", {headers: {"Accept": "application/json"}});       
+      }
+
     static async getSurveyById(id) {
       return axios.get(environment.backEndUrl + "/survey/" + id, {headers: {"Accept": "application/json"}});       
     }
