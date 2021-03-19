@@ -1,89 +1,85 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { requestService } from '../services/requestService';
 import { Button} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
+import { FormControl, FormLabel, RadioGroup, FormControlLabel} from "@material-ui/core";
 
 
-class RadioSurvey extends React.Component {
+function RadioSurvey(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggle: false,
-      selectedAnswerId: -1,
-      id: props.id
-    };
-    this.openSurvey = this.openSurvey.bind(this);
-    this.onValueChange = this.onValueChange.bind(this);
+  const [selectedAnswerId, setSelectedAnswerId] = useState(-1);
+  const [id, setId] = useState(props.id);
+  const [toggle, setToggle] = useState(false);
+  
+  const openSurvey= e => {
+    setToggle(true);
   }
 
-  openSurvey(event){
-    this.setState({
-      toggle: event.target = true
-    });
+  const onValueChange = e => {
+    setSelectedAnswerId(Number(e.target.value));
   }
 
-  onValueChange = e => {
-    console.log("value: " + e.target.value);
-    this.setState({
-      selectedAnswerId: e.target.value
-    })
-  }
-
-  getResults = e => {
-    document.location.href="/AnalyseSurvey/" + this.props.id;
+  const getResults = e => {
+    document.location.href="/AnalyseSurvey/" + props.id;
   }
 
 
-  formSubmit = event => {
+ const formSubmit = event => {
     alert("answer submitted");
     event.preventDefault();
-    console.log(this.state.id);
+    console.log(id);
     // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
 
-    requestService.postSubmisson(this.props.id, [5]);
+    requestService.postSubmisson(id, [{id: selectedAnswerId}]);
     console.log("submisson posted");
     
   }
 
-    render() {
-    
-    const answers = this.props.answerOptions.map((answer, index) => {
-        return (
-          <label key={index}>
-             <input key={index} id={index} type="radio" value={answer.content} checked={this.state.selectedValue === answer.content} onChange={this.onValueChange}/>
-          {answer.content}
-           <br></br>
-          </label>
-        );
-        });
+  const answers = props.answerOptions.map((answer, index) => {
+    return (
 
-      if(this.state.toggle === false){
+      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content} />
+
+    );
+    });
+
+    /*      
+    <label key={index}>
+        <Radio key={index} id={index} type="radio" value={answer.id} checked={selectedAnswerId == answer.id} onChange={onValueChange}/>
+      {answer.content}
+      <br></br>
+      </label>
+      */
+
+  
+    if(toggle === false){
         return(
           <div>
-            <h3>{this.props.surveyName}</h3>
-            <Button variant="contained" onClick={this.openSurvey}>Show full Survey</Button>
+            <h3>{props.surveyName}</h3>
+            <Button variant="contained" onClick={openSurvey}>Show full Survey</Button>
           </div>
         );
       }
-       else { return(
-            <form onSubmit={this.formSubmit}>
-              <h3>{this.props.surveyName}</h3>
-              <h4>{this.props.questionText}</h4>
-              <div>
-                {answers}
-                <p>Your answer is: {this.state.selectedAnswerId}</p>
-              </div>
-               <div>
-               </div>
+    else{ return(
+            <form onSubmit={formSubmit}>
+              <h3>{props.surveyName}</h3>
+              <h4>{props.questionText}</h4>
+              
+              <FormControl component="fieldset">
+                <RadioGroup aria-label="SurveyQuestions" name="surveys" value={selectedAnswerId} onChange={onValueChange}>
+                  {answers}
+                </RadioGroup>
+              </FormControl>
+              
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
-              <Button variant="contained" onClick={this.getResults}>Analyse Survey</Button>
+              <Button variant="contained" onClick={getResults}>Analyse Survey</Button>
           </form>
-        )
+        );
       }
-    }
 
-  }
+ }
+
+  
   
 
   export default RadioSurvey;

@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import AddIcon from '@material-ui/icons/Add';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,11 +85,11 @@ export function Home() {
         <div className={classes.root}>
             <Grid container spacing={2} direction="row">
                     <Grid container item xs={2} spacing={1} className={classes.container}>
-                        <Paper className={classes.paper}>
+                        <Paper className={classes.paper} onClick={() => {document.location.href = "/CreateSurvey"}}>
                             <Typography gutterBottom variant="h6">
                                 Create New
                             </Typography>
-                            <AssignmentIcon fontSize="large"/>
+                            <AddIcon fontSize="large"/>
                         </Paper>
                     </Grid>
                     {SurveysToRender.map(survey => (
@@ -102,24 +102,6 @@ export function Home() {
             </Grid>
         </div>
     )
-
-
-    /*
-    return (
-            <div>
-                <img className="HomeLogo"src={logo} alt="SurvHeyLogo"/>
-                <div className="SurveyList">
-                    <h2>My Surveys: </h2>
-                    <h3>Find your created Surveys down below: </h3> 
-                        <p>View them again or participate yourself</p>
-                    <ul>
-                        {SurveysToRender}
-                    </ul>
-                </div>
-            </div>
-        
-     );
-     */
 
     
 }

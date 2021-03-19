@@ -37,7 +37,7 @@ export class requestService {
     static async postSubmisson(surveyId, selectedAnswerIDs){
         let ip = await trackingService.getClientIp();
         let trackingToken = trackingService.getTrackingToken();
-        let answerOptionIDs = this.toAnswerOptionIDs(selectedAnswerIDs);
+        //let answerOptionIDs = this.toAnswerOptionIDs(selectedAnswerIDs);
 
         let jsonBody = {
            "surveyId": surveyId,
@@ -45,7 +45,7 @@ export class requestService {
                 "IP": ip,
                 "Cookie": trackingToken
            },
-            "choices": answerOptionIDs
+            "choices": selectedAnswerIDs
         }
 
         console.log(jsonBody);
