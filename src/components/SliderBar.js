@@ -6,8 +6,6 @@ import { requestService } from '../services/requestService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 
 
-
-
 function SliderBar() {
     const [answerOptions, setAnswerOptions] = useState([]);
     const [results, setResults] = useState([]);

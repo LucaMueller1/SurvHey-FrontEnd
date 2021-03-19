@@ -3,6 +3,8 @@ import { requestService } from '../services/requestService';
 import { Button, FormControl, Radio, RadioGroup, FormLabel, FormControlLabel} from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { Fragment } from 'react';
+import { AuthInterceptor } from '../services/AuthInterceptor';
+
 //import Radio from '@material-ui/core/Radio';
 //import {exportSurveyData} from '../services/exportSurveyData'
 
@@ -28,9 +30,17 @@ class SurveyCreator extends React.Component {
   
   //gets called when submitting the form
   formSubmit = (event) => {
-    alert("Survey was Submited sucessfull");
-    requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.surveyTyp,this.state.answerOptions);
+    event.preventDefault();
+    AuthInterceptor.intercept();
+
+    requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.surveyTyp,this.state.answerOptions).then(res => {
+      alert("Survey was Submited sucessfull");
+      document.location.href = "/";
+    }).catch(error => {
+      console.log(error);
+    });
   }
+
   onValueChange(event) {
     this.setState({
       selectedOption: event.target.value

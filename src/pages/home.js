@@ -5,8 +5,38 @@ import RadioSurvey from '../components/RadioSurvey';
 import { AuthService } from '../services/authService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 import { Typography} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      padding: theme.spacing(2),
+      paddingLeft: '200px',
+      height: '100%',
+      width: '100%'
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: 'auto',
+      maxWidth: 800,
+      height: '100%',
+      width: '180px',
+      alignItems: "center",
+      justify: "center"
+    },
+    container: {
+        alignItems: "center",
+        justify: "center"
+    }
+}));
 
 export function Home() {
+    const classes = useStyles();
     const [surveyList, setSurveyList] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -50,6 +80,31 @@ export function Home() {
 
     console.log(surveyList);
     
+
+    return (
+        <div className={classes.root}>
+            <Grid container spacing={2} direction="row">
+                    <Grid container item xs={2} spacing={1} className={classes.container}>
+                        <Paper className={classes.paper}>
+                            <Typography gutterBottom variant="h6">
+                                Create New
+                            </Typography>
+                            <AssignmentIcon fontSize="large"/>
+                        </Paper>
+                    </Grid>
+                    {SurveysToRender.map(survey => (
+                        <Grid container item xs={2} spacing={1} className={classes.container}>
+                            <Paper className={classes.paper}>
+                                {survey}
+                            </Paper>
+                        </Grid>
+                    ))}
+            </Grid>
+        </div>
+    )
+
+
+    /*
     return (
             <div>
                 <img className="HomeLogo"src={logo} alt="SurvHeyLogo"/>
@@ -64,6 +119,7 @@ export function Home() {
             </div>
         
      );
+     */
 
     
 }
