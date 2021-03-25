@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../SurvHeyLogo.png';
 import { requestService } from '../services/requestService';
-import RadioSurvey from '../components/RadioSurvey';
 import { AuthService } from '../services/authService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
-import { Typography} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import AddIcon from '@material-ui/icons/Add';
+import PaperSurveyItem from '../components/PaperSurveyItem';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,14 +22,11 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2),
       margin: 'auto',
       maxWidth: 800,
+      maxHeight: 120,
       height: '100%',
       width: '180px',
       alignItems: "center",
       justify: "center"
-    },
-    container: {
-        alignItems: "center",
-        justify: "center"
     }
 }));
 
@@ -65,20 +60,6 @@ export function Home() {
             fetchData();
         }
       }, []);
-
-    console.log(surveyList);
-    let SurveysToRender;
-    if (surveyList) {
-        SurveysToRender = surveyList.map(( survey, index) => {
-            return(
-                <RadioSurvey id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.answerMode} answerOptions={survey.answerOptions}/>
-                );
-            })
-        } else {
-            SurveysToRender = "No Surveys found. Please start by creating one...";
-        }
-
-    console.log(surveyList);
     
 
     return (
@@ -92,11 +73,9 @@ export function Home() {
                             <AddIcon fontSize="large"/>
                         </Paper>
                     </Grid>
-                    {SurveysToRender.map(survey => (
+                    {surveyList.map(survey => (
                         <Grid container item xs={2} spacing={1} className={classes.container}>
-                            <Paper className={classes.paper}>
-                                {survey}
-                            </Paper>
+                            <PaperSurveyItem survey={survey}></PaperSurveyItem>
                         </Grid>
                     ))}
             </Grid>
