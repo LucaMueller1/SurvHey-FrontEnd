@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import { requestService } from '../services/requestService';
+import React, {useState } from 'react';
+import { requestService } from '../../services/requestService';
 import { Button} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
-import { FormControl, FormLabel, RadioGroup, FormControlLabel} from "@material-ui/core";
+import { FormControl, RadioGroup, FormControlLabel} from "@material-ui/core";
 
 
 function RadioSurvey(props) {

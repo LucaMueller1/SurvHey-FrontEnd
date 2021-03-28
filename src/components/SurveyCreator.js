@@ -1,12 +1,10 @@
 import React from 'react';
 import { requestService } from '../services/requestService';
-import { Button, FormControl, Radio, RadioGroup, FormLabel, FormControlLabel} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
-import { Fragment } from 'react';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 
-//import Radio from '@material-ui/core/Radio';
-//import {exportSurveyData} from '../services/exportSurveyData'
+
 
 
 
@@ -16,7 +14,8 @@ class SurveyCreator extends React.Component {
     this.state = {
       surveyName: "Enter your Surveys name",
       questionText: "Enter your Question",
-      surveyTyp: "radio",
+      surveyTyp: ["Select", "radio","checkbox"],
+      selectedSurveyType: "",
       phase: 0,
       answerOptions: [],
       selectedOption: ""
@@ -26,6 +25,7 @@ class SurveyCreator extends React.Component {
     this.switchPhase = this.switchPhase.bind(this);
     this.onChangeQuestionText = this.onChangeQuestionText.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
+    this.onSurveyTypeChange = this.onSurveyTypeChange.bind(this);
   }
   
   //gets called when submitting the form
@@ -33,12 +33,20 @@ class SurveyCreator extends React.Component {
     event.preventDefault();
     AuthInterceptor.intercept();
 
-    requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.surveyTyp,this.state.answerOptions).then(res => {
+    requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.selectedSurveyType,this.state.answerOptions).then(res => {
       alert("Survey was Submited sucessfull");
       document.location.href = "/";
     }).catch(error => {
       console.log(error);
     });
+  }
+
+
+  onSurveyTypeChange(event){
+    this.setState({
+      selectedSurveyType: event.target.value
+    });
+    console.log(event.target.value)
   }
 
   onValueChange(event) {
@@ -103,8 +111,10 @@ class SurveyCreator extends React.Component {
         <input type="text" value={this.state.questionText} onChange={this.onChangeQuestionText}></input>
         <br></br>
         <label for="optionSelect">Choose answer option type</label>
-        <select id="optionSelect"> 
-          <option value={this.state.surveyTyp}>{this.state.surveyTyp}</option>
+        <select id="optionSelect" onChange={this.onSurveyTypeChange}> 
+          <option value={this.state.surveyTyp[0]}>{this.state.surveyTyp[0]}</option>
+          <option value={this.state.surveyTyp[1]}>{this.state.surveyTyp[1]}</option>
+          <option value={"check"}>{this.state.surveyTyp[2]}</option>
         </select>
         <br></br>
 
@@ -148,11 +158,7 @@ class SurveyCreator extends React.Component {
           {this.state.answerOptions.map((opt, index) => {
             return (
               <div>
-                <label>
-                <input id={opt} type={this.state.surveyTyp} key={index} value={opt} checked={this.state.selectedValue === opt} onChange={this.onValueChange} />
-                {opt}
-                </label>
-                
+                <div key={index}> {opt} </div>
               </div>
             )
           })}

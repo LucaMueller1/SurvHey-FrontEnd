@@ -81,7 +81,7 @@ export default function SignInSide() {
     console.log("registrating");
     requestService.createUser(email, password, lastName, firstName).then(res => {
       console.log("User created");
-      //setRegistered(true);
+      setRegistered(true);
     }).catch(error => {
       console.log(error);
       console.log("Error while creating user");

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../SurvHeyLogo.png';
 import { requestService } from '../services/requestService';
-import RadioSurvey from '../components/RadioSurvey';
 import { AuthService } from '../services/authService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 import { Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import AddIcon from '@material-ui/icons/Add';
+import { SurveyTypeChooser } from '../components/SurveyTypes/SurveyTypeChooser';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,7 +45,7 @@ export function Home() {
 
         try {
             const result = await requestService.getSurveys();
- 
+            console.log(result)
             setSurveyList(result.data);
         } catch (error) {
             setIsError(true);
@@ -71,7 +69,7 @@ export function Home() {
     if (surveyList) {
         SurveysToRender = surveyList.map(( survey, index) => {
             return(
-                <RadioSurvey id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.answerMode} answerOptions={survey.answerOptions}/>
+                <SurveyTypeChooser id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions}/>
                 );
             })
         } else {
