@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { requestService } from "../services/requestService";
-import RadioSurvey from './RadioSurvey';
+import RadioSurvey from './SurveyTypes/RadioSurvey';
 
 
 // Survey true/false = null abfragen dann Logik implementieren
