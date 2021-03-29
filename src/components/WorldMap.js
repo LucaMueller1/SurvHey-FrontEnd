@@ -20,27 +20,19 @@ margin: "0 auto",
 const geoUrl =
 "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const customScale = scaleLinear().domain([5,100]).range(["#adedff","#ff0000"])
+const customScale = scaleLinear([0,1000], ["#fff33b","#e93e3a"])
 
 const MapChart = ({ setTooltipContent }) => {
-  const [data, setData] = useState([
-    { id: "DEU", name: "Germany", val: 100 },
-    { id: "CAN", name: "Canada", val: 1000 },
-    { id: "ISR", name: "Israel", val: 5 },
-    ]);
+  const [data, setData] = useState();
   let {id} = useParams();
 
-  // useEffect(() => {
-  //   // https://www.bls.gov/lau/
-  //   AuthInterceptor.intercept();
-  //       requestService.getAnalysis(id).then(res => {
-  //           //console.log(res.data.countries);
-  //           //setData(Object.entries(res.data.countries));
-  //           setData(data);
-  //           console.log("DATA:");
-  //           console.log(data);
-  //       });
-  // }, []);
+  useEffect(() => {
+
+    AuthInterceptor.intercept();
+        requestService.getAnalysis(id).then(res => {
+            setData(Object.entries(res.data.countries));
+        });
+  }, []);
 
   return (
     <div style={wrapperStyles}>
@@ -48,17 +40,14 @@ const MapChart = ({ setTooltipContent }) => {
           height={551}
           style={{
             width: "100%",
-            height: "auto",
+            height: "auto"
           }}>
         <ZoomableGroup>
         <Geographies geography={geoUrl}>
             {({ geographies, proj }) =>
             geographies.map((geo, i) =>  {
 
-                console.log(data[0].id)
-                const country = data.find(d => d.id  === geo.properties.ISO_A3)
-                console.log("country:"+country);
-                //country = "Germany";
+                const country = data.find(d => d[0] === geo.properties.NAME)
 
                 return (
                   <Geography
@@ -67,21 +56,21 @@ const MapChart = ({ setTooltipContent }) => {
                     geography={ geo }
                     projection={ proj }
                     onMouseEnter={() => {
-                      const { NAME, POP_EST } = geo.properties;
-                      setTooltipContent(country ? `${NAME} — ${country.val}` : "");
+                      const { NAME } = geo.properties;
+                      setTooltipContent(country ? `${NAME}: ${country[1]}` : "");
                     }}
                     onMouseLeave={() => {
                       setTooltipContent("");
                     }}
                     style={{
                       default: {
-                        fill: country ? customScale(country.val) : "#f0f0f0",
+                        fill: country ? customScale(country[1]) : "#f0f0f0",
                         stroke: "#FFF",
                         strokeWidth: 0.75,
                         outline: "none",
                       },
                       hover: {
-                        fill: "#dbdbdb",
+                        fill: country ? customScale(country[1]) : "#dbdbdb",
                         stroke: "#FFF",
                         strokeWidth: 0.75,
                         outline: "none",
