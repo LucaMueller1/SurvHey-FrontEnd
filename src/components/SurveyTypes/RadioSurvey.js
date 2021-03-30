@@ -43,13 +43,13 @@ function RadioSurvey(props) {
     );
     });
 
-    /*      
+    /*  
     <label key={index}>
         <Radio key={index} id={index} type="radio" value={answer.id} checked={selectedAnswerId == answer.id} onChange={onValueChange}/>
       {answer.content}
       <br></br>
       </label>
-      */
+    */
 
   
     if(toggle === false){

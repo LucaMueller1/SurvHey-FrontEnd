@@ -1,8 +1,8 @@
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { requestService } from "../services/requestService";
 import RadioSurvey from './SurveyTypes/RadioSurvey';
+import { SurveyTypeChooser } from "./SurveyTypes/SurveyTypeChooser";
 
 
 // Survey true/false = null abfragen dann Logik implementieren
@@ -10,31 +10,33 @@ import RadioSurvey from './SurveyTypes/RadioSurvey';
 //
 export function SurveyIFrame() {
     let {id} = useParams();
-    let survey = useEffect(() => {
+    const [survey, setSurvey] = useState({});
+
+    useEffect(() => {
         console.log(id);
-        requestService.getSurveyById(id).then( res => {
+        requestService.getSurveyById(id).then(res => {
             console.log(res.data);
-            survey = res.data; 
-        }).catch( err => {
+            setSurvey(res.data); 
+        }).catch(err => {
             console.log(err);
-            survey = null;
+            setSurvey(null);
         });
         
-        
-    }, [id]); 
+    }, []); 
 
     if(survey === null) {
         return (
             <h3>error occured:</h3>
         )
+    } else {
+        return (
+            <div>
+                <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions}/>
+            </div>
+        
+        );
     }
     
-    return (
-        <div>
-            <RadioSurvey/>
-        </div>
-    
-    );
 }
 
 export default SurveyIFrame;

@@ -7,17 +7,26 @@ import { Button} from '@material-ui/core';
 
 export function CheckBoxSurvey(props){
 
-    const [selectedAnswerIds, setSelectedAnswerIds] = useState([]);
+    const [selectedIDs, setSelectedIDs] = React.useState({});
     const [id, setId] = useState(props.id);
     const [toggle, setToggle] = useState(false);
+
+    useEffect(() => {
+      let ids = {};
+      props.answerOptions.map(answer => {
+        ids[answer.id] = false;
+      });
+      setSelectedIDs(ids);
+      console.log(selectedIDs);
+    }, []);
     
     const openSurvey= e => {
       setToggle(true);
     }
   
     const onValueChange = e => {
-      setSelectedAnswerIds(Number(e.target.value))
-      console.log(selectedAnswerIds);
+      setSelectedIDs(Number(e.target.value))
+      console.log(selectedIDs);
     }
   
     const getResults = e => {
@@ -28,14 +37,50 @@ export function CheckBoxSurvey(props){
    const formSubmit = event => {
       alert("answer submitted");
       event.preventDefault();
-      console.log(id);
       // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
   
-      requestService.postSubmisson(id, [{id: selectedAnswerIds}]);
+      console.log(selectedIDs);
+      let arr = [];
+      for (let key in selectedIDs) {
+        console.log("KEY: " + key);
+        if(selectedIDs[key] === true) {
+          arr.push(key);
+        }
+      }
+      console.log(arr);
+      
+      requestService.postSubmisson(id, toAnswerOptionIDs(arr));
       console.log("submisson posted");
       
     }
+
+    const toAnswerOptionIDs = (list) => {
+      let rList = [];
+      list.forEach(function(element){
+          rList.push({"id": element});
+      });
+      return rList;
+  }
+
+    const handleChange = (event) => {
+      setSelectedIDs({ ...selectedIDs, [event.target.value]: event.target.checked });
+    };
   
+    //algorithm to handle answer and checking logic for multiple answer options
+    /*const onCheckboxAnswerChange = event => {
+      console.log(selectedIDs);
+      if(selectedIDs.find(event.target.value) === false){
+        setSelectedIDs(selectedIDs.push(event.target.value));
+        console.log("not found in Array...answer added")
+      }
+      else{
+        let index = selectedIDs.indexOf(event.target.value);
+          setSelectedIDs(selectedIDs.splice(index, 1));
+          console.log("Element already found, got removed");
+      }
+    }
+   */
+
     const answers = props.answerOptions.map((answer, index) => {
       return (
   
@@ -58,7 +103,7 @@ export function CheckBoxSurvey(props){
               <h4>{props.questionText}</h4>
               
               <FormControl component="fieldset">
-                <FormGroup aria-label="SurveyQuestions" name="surveys" value={selectedAnswerIds} onChange={onValueChange}>
+                <FormGroup aria-label="SurveyQuestions" name="surveys" value={selectedIDs} onChange={handleChange}>
                   {answers}
                 </FormGroup>
               </FormControl>

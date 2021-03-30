@@ -13,7 +13,7 @@ export function SurveyTypeChooser(props) {
   useEffect(() => {
     setSurveytype(props.surveyType);
     console.log(props.surveyType);
-  }, []);
+  }, [props]);
   
 
   if(surveyType === "RADIO"){
@@ -22,15 +22,14 @@ export function SurveyTypeChooser(props) {
               <RadioSurvey id={props.id} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions}/>
             </div>
         );
-    }
-
-  if(surveyType === "CHECK"){
+  } else if(surveyType === "CHECK"){
     return(
       <CheckBoxSurvey id={props.id} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions}/>
     );
-  }
+  } else {
     return(
       <h2>Wrong Surveytype selected while creating!</h2>
     );
+  }
 
 }
