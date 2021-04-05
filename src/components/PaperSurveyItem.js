@@ -1,14 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import PollIcon from '@material-ui/icons/Poll';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
@@ -25,40 +23,35 @@ const useStyles = makeStyles((theme) => ({
       margin: 'auto',
       maxWidth: 180,
       maxHeight: 120,
-      height: '100%',
+      height: '120px',
       width: '180px',
       alignItems: "center",
-      justify: "center"
+      justify: "center",
+
+      "& .buttonMenu": {
+        display: "none"
+      },
+      "&:hover .buttonMenu": {
+        display: "block"
+      }
     },
     container: {
         position: 'absolute'
     },
     buttonGroup: {
-        top: '110px',
-        width: '212px',
-        marginLeft: -12,
-        position: 'absolute'
+
     },
     hoverEdit: {
         borderRadius: '4px',
-        width: '33.33%',
-        "&:hover": {
-          backgroundColor: 'rgb(177, 7, 7, 0.42)'
-        }
+        width: '33.33%'
     },
     hoverView: {
         borderRadius: '0px',
-        width: '33.33%',
-        "&:hover": {
-          backgroundColor: 'rgb(7, 77, 177, 0.42)'
-        }
+        width: '33.33%'
     },
     hoverExport: {
         borderRadius: '4px',
-        width: '33.33%',
-        "&:hover": {
-          backgroundColor: 'rgb(7, 177, 77, 0.42)'
-        }
+        width: '33.33%'
     }
 }));
 
@@ -79,22 +72,22 @@ function PaperSurveyItem(props) {
 
     return(
     <Paper className={classes.paper}>
-        <Grid container spacing={1} style={{width: '100%'}}>
-            <Grid item xs={12}>
-                <Typography gutterBottom variant="subtitle2">
+        <Grid container spacing={2}>
+            <Grid item xs={12} wrap="nowrap">
+                <Typography gutterBottom noWrap variant="subtitle2">
                     {props.survey.name}
                 </Typography>
                 <Divider />
             </Grid>
 
-            <Grid item xs={12}>
-                <Typography gutterBottom variant="body2">
+            <Grid item xs={12} wrap="nowrap">
+                <Typography gutterBottom noWrap variant="body2">
                     {props.survey.questionText}
                 </Typography>
             </Grid>
 
-            <Grid container className={classes.container}>
-                <ButtonGroup className={classes.buttonGroup} variant="contained" size="small" aria-label="small outlined button group">
+            <Grid item xs={12}>
+                <ButtonGroup fullWidth className={"buttonMenu"} variant="contained" size="small" aria-label="small outlined button group">
                     <IconButton onClick={clickEdit} className={classes.hoverEdit} aria-label="edit">
                         <EditIcon></EditIcon>
                     </IconButton>

@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
     paper: {
       padding: theme.spacing(2),
       margin: 'auto',
-      maxWidth: 800,
+      maxWidth: 180,
       maxHeight: 120,
-      height: '100%',
+      height: '120px',
       width: '180px',
       alignItems: "center",
       justify: "center"
