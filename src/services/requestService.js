@@ -34,6 +34,10 @@ export class requestService {
         
     }
 
+    static async deleteSurvey(id){
+        return axios.delete(environment.backEndUrl + "/survey/" + id);
+    }
+
     static async postSubmisson(surveyId, selectedAnswerIDs){
         let ip = await trackingService.getClientIp();
         let trackingToken = trackingService.getTrackingToken();
