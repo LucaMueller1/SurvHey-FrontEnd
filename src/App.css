@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .App {
   text-align: center;
@@ -11,7 +12,7 @@ body{
   background-position: center;
   background-size: 100% 100%;
   color: white;
-  font-family: 'Alegreya', serif;
+  font-family: 'Roboto', sans-serif;
 }
 
  nav {

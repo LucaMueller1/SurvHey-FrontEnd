@@ -26,10 +26,10 @@ const MapChart = ({ setTooltipContent }) => {
   const [data, setData] = useState();
   let {id} = useParams();
 
-  useEffect(() => {
+  useEffect(async () => {
 
     AuthInterceptor.intercept();
-        requestService.getAnalysis(id).then(res => {
+        await requestService.getAnalysis(id).then(res => {
             setData(Object.entries(res.data.countries));
         });
   }, []);
