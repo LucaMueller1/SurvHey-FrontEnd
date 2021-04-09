@@ -17,19 +17,20 @@ function RadioSurvey(props) {
   useEffect(() => {
     AuthInterceptor.intercept();
     requestService.getResults(id).then(res => {
+      console.log(res.data.choices);
         setResults(Object.entries(res.data.choices));
     }
         
         );
     getResultSum();
-    console.log(results)
+    console.log(results);
+    console.log(resultSum);
     
 }, []);
   
 const getResultSum =async () => {
   await requestService.getAnalysis(id).then(res => {
       setResultSum(res.data.amount);
-      console.log(res.data.amount);
   }).catch( error => {
       console.log(error);
   });
@@ -62,7 +63,7 @@ const getResultSum =async () => {
   const answers = props.answerOptions.map((answer, index) => {
     return (
 
-      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content  + " " +  results[0][1]} />
+      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content  + "  " + (results[0][1] / resultSum) * 100 + "%"} />
 
     );
     });
@@ -90,11 +91,16 @@ const getResultSum =async () => {
               <h4>{props.questionText}</h4>
               
               <FormControl component="fieldset">
+                <h3>{"AntwortContent" + results[0][0] }</h3>
+                <h3>{"Anzahl:" + results[0][1]}</h3>
+                <h3>{"Gesamte Antworten:" + resultSum}</h3>
+                <h3>{"Antworten in Prozent:" + (results[0][1] / resultSum) * 100 + "%"}</h3>
                 <RadioGroup aria-label="SurveyQuestions" name="surveys" value={selectedAnswerId} onChange={onValueChange}>
                   {answers}
                 </RadioGroup>
               </FormControl>
               
+              <br></br>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
               <Button variant="contained" onClick={getResults}>Analyse Survey</Button>
           </form>
