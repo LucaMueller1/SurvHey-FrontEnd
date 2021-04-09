@@ -1,11 +1,15 @@
 import React, { useState, useEffect} from 'react';
 import { useParams } from "react-router";
 import $ from "jquery";
+import styles from './SliderBar.css';
 import { requestService } from '../services/requestService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 
 
+
+
 function SliderBar() {
+    const [answerOptions, setAnswerOptions] = useState([]);
     const [results, setResults] = useState([]);
     const [resultSum, setResultSum] = useState(0);
     let {id} = useParams();

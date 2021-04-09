@@ -3,11 +3,12 @@ import { requestService } from '../services/requestService';
 import { AuthService } from '../services/authService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
-import { SurveyTypeChooser } from '../components/SurveyTypes/SurveyTypeChooser';
+import Grow from '@material-ui/core/Grow';
 import PaperSurveyItem from '../components/PaperSurveyItem';
 
 
@@ -26,8 +27,14 @@ const useStyles = makeStyles((theme) => ({
       maxHeight: 120,
       height: '120px',
       width: '180px',
+      display: "flex",
+      justifyContent: "center",
       alignItems: "center",
-      justify: "center"
+      backgroundColor: "#00a86b",
+      "&:hover": {
+        backgroundColor: "white",
+        cursor: "pointer"
+      }
     }
 }));
 
@@ -61,35 +68,25 @@ export function Home() {
             fetchData();
         }
       }, []);
-
-    console.log(surveyList);
-    let SurveysToRender;
-    if (surveyList) {
-        SurveysToRender = surveyList.map(( survey, index) => {
-            return(
-                <SurveyTypeChooser id={survey.id} key={index} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions}/>
-                );
-            })
-        } else {
-            SurveysToRender = "No Surveys found. Please start by creating one...";
-        }
-
-    console.log(surveyList);
     
 
     return (
         <div className={classes.root}>
             <Grid container spacing={2} direction="row">
-                    <Grid container item xs={2} spacing={1} className={classes.container}>
-                        <Paper className={classes.paper} onClick={() => {document.location.href = "/CreateSurvey"}}>
-                            <Typography gutterBottom variant="h6">
-                                Create New
-                            </Typography>
-                            <AddIcon fontSize="large"/>
-                        </Paper>
+                    <Grid container item xs={2} spacing={1}>
+                        <Grow in={true}>
+                            <Paper className={classes.paper} onClick={() => {document.location.href = "/CreateSurvey"}}>
+                                <Box>
+                                    <Typography gutterBottom variant="h6">
+                                        Create New
+                                    </Typography>
+                                    <AddIcon fontSize="large"/>
+                                </Box>
+                            </Paper>
+                        </Grow>
                     </Grid>
                     {surveyList.map(survey => (
-                        <Grid container item xs={2} spacing={1} className={classes.container}>
+                        <Grid container item xs={2} spacing={1}>
                             <PaperSurveyItem survey={survey}></PaperSurveyItem>
                         </Grid>
                     ))}
