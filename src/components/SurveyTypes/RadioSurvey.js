@@ -1,8 +1,9 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import { requestService } from '../../services/requestService';
 import { Button} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import { FormControl, RadioGroup, FormControlLabel} from "@material-ui/core";
+import { AuthInterceptor } from '../../services/AuthInterceptor';
 
 
 function RadioSurvey(props) {
@@ -10,6 +11,29 @@ function RadioSurvey(props) {
   const [selectedAnswerId, setSelectedAnswerId] = useState(-1);
   const [id, setId] = useState(props.id);
   const [toggle, setToggle] = useState(false);
+  const [results, setResults] = useState([]);
+  const [resultSum, setResultSum] = useState(0);
+
+  useEffect(() => {
+    AuthInterceptor.intercept();
+    requestService.getResults(id).then(res => {
+        setResults(Object.entries(res.data.choices));
+    }
+        
+        );
+    getResultSum();
+    console.log(results)
+    
+}, []);
+  
+const getResultSum =async () => {
+  await requestService.getAnalysis(id).then(res => {
+      setResultSum(res.data.amount);
+      console.log(res.data.amount);
+  }).catch( error => {
+      console.log(error);
+  });
+}
   
   const openSurvey= e => {
     setToggle(true);
@@ -38,7 +62,7 @@ function RadioSurvey(props) {
   const answers = props.answerOptions.map((answer, index) => {
     return (
 
-      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content} />
+      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content  + " " +  results[0][1]} />
 
     );
     });

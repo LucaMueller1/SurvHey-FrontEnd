@@ -7,11 +7,15 @@ import ReactTooltip from "react-tooltip";
      const [content, setContent] = useState("");
      return (
          <div>
+             <div>
              <h2>SurvHey Submissions</h2>
              <MapChart setTooltipContent={setContent}/>
              <ReactTooltip>{content}</ReactTooltip>
              <h2>SurvHey Result</h2>
-             <SliderBar/>
+             </div>
+             <div>
+                <SliderBar/>
+             </div>
          </div>
 
      );

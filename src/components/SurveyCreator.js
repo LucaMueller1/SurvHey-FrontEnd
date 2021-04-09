@@ -3,9 +3,22 @@ import { requestService } from '../services/requestService';
 import { Button } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { AuthInterceptor } from '../services/AuthInterceptor';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
 
-
-
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 
 class SurveyCreator extends React.Component {
@@ -18,7 +31,8 @@ class SurveyCreator extends React.Component {
       selectedSurveyType: "",
       phase: 0,
       answerOptions: [],
-      selectedOption: ""
+      selectedOption: "",
+     
     };
     this.formSubmit = this.formSubmit.bind(this);
     this.onChangeSurveyName = this.onChangeSurveyName.bind(this);
@@ -27,6 +41,7 @@ class SurveyCreator extends React.Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.onSurveyTypeChange = this.onSurveyTypeChange.bind(this);
   }
+  
   
   //gets called when submitting the form
   formSubmit = (event) => {
@@ -116,6 +131,7 @@ class SurveyCreator extends React.Component {
           <option value={this.state.surveyTyp[1]}>{this.state.surveyTyp[1]}</option>
           <option value={"check"}>{this.state.surveyTyp[2]}</option>
         </select>
+      
         <br></br>
 
         <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
