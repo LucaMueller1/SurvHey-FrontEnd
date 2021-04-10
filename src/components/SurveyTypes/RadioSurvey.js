@@ -63,7 +63,7 @@ const getResultSum =async () => {
   const answers = props.answerOptions.map((answer, index) => {
     return (
 
-      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content  + "  " + (results[0][1] / resultSum) * 100 + "%"} />
+      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content} />
 
     );
     });
