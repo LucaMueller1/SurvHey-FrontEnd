@@ -27,8 +27,8 @@ class SurveyCreator extends React.Component {
     this.state = {
       surveyName: "Enter your Surveys name",
       questionText: "Enter your Question",
-      surveyTyp: ["Select", "radio","checkbox"],
-      selectedSurveyType: "",
+      surveyTyp: ["radio","checkbox"],
+      selectedSurveyType: "radio",
       phase: 0,
       answerOptions: [],
       selectedOption: "",
@@ -127,9 +127,8 @@ class SurveyCreator extends React.Component {
         <br></br>
         <label for="optionSelect">Choose answer option type</label>
         <select id="optionSelect" onChange={this.onSurveyTypeChange}> 
-          <option value={this.state.surveyTyp[0]}>{this.state.surveyTyp[0]}</option>
-          <option value={this.state.surveyTyp[1]}>{this.state.surveyTyp[1]}</option>
-          <option value={"check"}>{this.state.surveyTyp[2]}</option>
+          <option value={"radio"}>Radio</option>
+          <option value={"check"}>Checkbox</option>
         </select>
       
         <br></br>

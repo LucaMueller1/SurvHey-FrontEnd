@@ -76,6 +76,12 @@ const getResultSum =async () => {
       </label>
     */
 
+      /*
+       <h3>{"AntwortContent" + results[0][0] }</h3>
+                <h3>{"Anzahl:" + results[0][1]}</h3>
+                <h3>{"Gesamte Antworten:" + resultSum}</h3>
+                <h3>{"Antworten in Prozent:" + (results[0][1] / resultSum) * 100 + "%"}</h3>
+      */
   
     if(toggle === false){
         return(
@@ -91,10 +97,6 @@ const getResultSum =async () => {
               <h4>{props.questionText}</h4>
               
               <FormControl component="fieldset">
-                <h3>{"AntwortContent" + results[0][0] }</h3>
-                <h3>{"Anzahl:" + results[0][1]}</h3>
-                <h3>{"Gesamte Antworten:" + resultSum}</h3>
-                <h3>{"Antworten in Prozent:" + (results[0][1] / resultSum) * 100 + "%"}</h3>
                 <RadioGroup aria-label="SurveyQuestions" name="surveys" value={selectedAnswerId} onChange={onValueChange}>
                   {answers}
                 </RadioGroup>

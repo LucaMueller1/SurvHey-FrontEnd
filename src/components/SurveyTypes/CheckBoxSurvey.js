@@ -109,7 +109,7 @@ export function CheckBoxSurvey(props){
     const answers = props.answerOptions.map((answer, index) => {
       return (
   
-        <FormControlLabel key={answer.id} value={answer.id} control={<Checkbox />} label={answer.content + "  " + resultSum + "   " + results[0]}/>
+        <FormControlLabel key={answer.id} value={answer.id} control={<Checkbox />} label={answer.content}/>
   
       );
       });
@@ -132,7 +132,7 @@ export function CheckBoxSurvey(props){
                   {answers}
                 </FormGroup>
               </FormControl>
-              
+              <br></br>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
               <Button variant="contained" onClick={getResults}>Analyse Survey</Button>
           </form>
