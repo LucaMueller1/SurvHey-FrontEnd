@@ -13,7 +13,7 @@ import {
 
 const wrapperStyles = {
 width: "100%",
-maxWidth: "70%",
+maxWidth: "100%",
 margin: "0 auto",
 }
 
@@ -36,16 +36,15 @@ const MapChart = ({ setTooltipContent }) => {
 
   return (
     <div style={wrapperStyles}>
-      <ComposableMap  data-tip="" width={980}
-          height={551}
+      <ComposableMap  data-tip=""
           style={{
             width: "100%",
             height: "auto"
           }}>
         <ZoomableGroup>
         <Geographies geography={geoUrl}>
-            {({ geographies, proj }) =>
-            geographies.map((geo, i) =>  {
+            { ({ geographies, proj }) =>
+             geographies.map( (geo, i) =>  {
 
                 const country = data.find(d => d[0] === geo.properties.NAME)
 
