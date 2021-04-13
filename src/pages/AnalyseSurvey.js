@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SliderBar from '../components/SliderBar';
 import MapChart from '../components/WorldMap';
 import ReactTooltip from "react-tooltip";
@@ -6,6 +6,9 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import { Autorenew } from '@material-ui/icons';
+import { useParams } from "react-router";
+import { requestService } from '../services/requestService';
+import { AuthInterceptor } from '../services/AuthInterceptor';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,10 +31,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
  export function AnalyseSurvey() {
+     let {id} = useParams();
      const [content, setContent] = useState("");
      const classes = useStyles();
+     const [survey, setSurvey] = useState({});
+
+
+     useEffect(() => {
+        console.log(id);
+        requestService.getSurveyById(id).then(res => {
+            console.log(res.data);
+            setSurvey(res.data); 
+        }).catch(err => {
+            console.log(err);
+            setSurvey(null);
+        });
+        
+    }, []); 
+
      return (
          <div className={classes.root}>
+             <h1>{survey.questionText}</h1>
              <Grid spacing={12} direction="column">
                  <Grid item xs={12}>
                  <h3>Result Distribution</h3>
