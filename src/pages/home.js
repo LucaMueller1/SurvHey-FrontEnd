@@ -11,12 +11,11 @@ import AddIcon from '@material-ui/icons/Add';
 import Grow from '@material-ui/core/Grow';
 import PaperSurveyItem from '../components/PaperSurveyItem';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
       padding: theme.spacing(2),
-      paddingLeft: '200px',
+      paddingLeft: '12%',
       height: '100%',
       width: '100%'
     },
