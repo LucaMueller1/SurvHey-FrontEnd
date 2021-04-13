@@ -32,16 +32,15 @@ const useStyles = makeStyles((theme) => ({
      const classes = useStyles();
      return (
          <div className={classes.root}>
-             <h1>SurvHey Analysis</h1>
              <Grid spacing={12} direction="column">
                  <Grid item xs={12}>
-                 <h2>Result Distribution</h2>
+                 <h3>Result Distribution</h3>
                     <Paper className={classes.paper}>
                         <SliderBar/>
                     </Paper>
                  </Grid>
                  <Grid item>
-                 <h2>Geolocation Insights</h2>
+                 <h3>Geolocation Insights</h3>
                     <Paper className={classes.paper} m={300}>
                         <MapChart setTooltipContent={setContent}/>
                         <ReactTooltip>{content}</ReactTooltip>
