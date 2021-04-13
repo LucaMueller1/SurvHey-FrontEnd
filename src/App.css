@@ -80,7 +80,17 @@ input[type=text]{
   size: 50% 50%;
 }
 
+.resultPieChart {
+  display: block;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
 
+.pieChartContainer {
+  margin: auto;
+}
 
 
 
