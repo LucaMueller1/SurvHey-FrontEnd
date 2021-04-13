@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#00a86b"
+      background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
     }
 }));
 

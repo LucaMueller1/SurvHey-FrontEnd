@@ -30,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#00a86b",
+      color: "white",
+      background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
+    },
+    createNew: {
+        transition: "all .5s ease-in-out;",
       "&:hover": {
-        backgroundColor: "white",
-        cursor: "pointer"
+        cursor: "pointer",
+        transform: "scale(1.1)"
       }
     }
 }));
@@ -76,7 +80,7 @@ export function Home() {
                     <Grid container item xs={2} spacing={1}>
                         <Grow in={true}>
                             <Paper className={classes.paper} onClick={() => {document.location.href = "/CreateSurvey"}}>
-                                <Box>
+                                <Box className={classes.createNew}>
                                     <Typography gutterBottom variant="h6">
                                         Create New
                                     </Typography>
