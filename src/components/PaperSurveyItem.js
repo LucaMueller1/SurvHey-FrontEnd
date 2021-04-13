@@ -13,6 +13,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grow from '@material-ui/core/Grow';
 import { requestService } from '../services/requestService';
 import { Fade } from '@material-ui/core';
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -58,24 +59,25 @@ const useStyles = makeStyles((theme) => ({
 
 function PaperSurveyItem(props) {
     const classes = useStyles();
+    const history = useHistory();
 
     const clickExport = () => {
-        document.location.href = "/Survey/" + props.survey.id;
+        history.push("/Survey/" + props.survey.id);
     }
 
     const clickEdit = () => {
-        document.location.href = "/CreateSurvey/" + props.survey.id;
+        history.push("/CreateSurvey/" + props.survey.id);
     }
 
     const clickView = () => {
-        document.location.href = "/AnalyseSurvey/" + props.survey.id;
+        history.push("/AnalyseSurvey/" + props.survey.id);
     }
 
     const [wrap, setWrap] = useState(false);
 
     const clickDelete = () => {
         requestService.deleteSurvey(props.survey.id).then(res => {
-            document.location.reload();
+            history.go(0);
         }).catch(err => {
             console.log("Error while deleting survey with id: " + props.survey.id);
         });

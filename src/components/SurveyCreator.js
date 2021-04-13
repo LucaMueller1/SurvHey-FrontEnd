@@ -9,6 +9,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
+
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -50,7 +53,7 @@ class SurveyCreator extends React.Component {
 
     requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.selectedSurveyType,this.state.answerOptions).then(res => {
       alert("Survey was Submited sucessfull");
-      document.location.href = "/";
+      this.props.history.push('');      //document.location.href = "/";
     }).catch(error => {
       console.log(error);
     });
@@ -186,4 +189,4 @@ class SurveyCreator extends React.Component {
   
 }
 
-export default SurveyCreator;
+export default  withRouter(SurveyCreator);
