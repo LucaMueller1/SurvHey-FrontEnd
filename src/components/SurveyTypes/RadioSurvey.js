@@ -11,30 +11,7 @@ function RadioSurvey(props) {
   const [selectedAnswerId, setSelectedAnswerId] = useState(-1);
   const [id, setId] = useState(props.id);
   const [toggle, setToggle] = useState(false);
-  const [results, setResults] = useState([]);
-  const [resultSum, setResultSum] = useState(0);
-
-  useEffect(() => {
-    AuthInterceptor.intercept();
-    requestService.getResults(id).then(res => {
-      console.log(res.data.choices);
-        setResults(Object.entries(res.data.choices));
-    }
-        
-        );
-    getResultSum();
-    console.log(results);
-    console.log(resultSum);
-    
-}, []);
   
-const getResultSum =async () => {
-  await requestService.getAnalysis(id).then(res => {
-      setResultSum(res.data.amount);
-  }).catch( error => {
-      console.log(error);
-  });
-}
   
   const openSurvey= e => {
     setToggle(true);
@@ -50,15 +27,16 @@ const getResultSum =async () => {
 
 
  const formSubmit = event => {
-    alert("answer submitted");
     event.preventDefault();
-    console.log(id);
     // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
 
-    requestService.postSubmisson(id, [{id: selectedAnswerId}]);
-    console.log("submisson posted");
-    
-  }
+    requestService.postSubmisson(id, [{id: selectedAnswerId}]).then(res => {
+      props.showResultChart();
+    }).catch(error => {
+      console.log(error);
+    });
+
+ }
 
   const answers = props.answerOptions.map((answer, index) => {
     return (

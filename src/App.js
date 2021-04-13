@@ -24,7 +24,7 @@ function App() {
         <div>
            <Nav/>
 
-           <Route path="/" exact component={Home}/>
+            <Route path="/" exact component={Home}/>
             <Route path="/CreateSurvey" component={CreateSurvey} />
             <Route path="/ExportSurvey" component={ExportSurvey} />
             <Route path="/AnalyseSurvey/:id" component={AnalyseSurvey}/>

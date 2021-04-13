@@ -16,7 +16,7 @@ export function Nav() {
     useEffect(() => {
         AuthInterceptor.intercept();
         requestService.getSurveys().then(res => {
-          setUser(res.data[0][ 'user']);
+          setUser("Test");
            
         }
             
@@ -28,7 +28,7 @@ export function Nav() {
     
     return (
         <nav>
-            <h3>{"Welcome " + user.firstName}</h3>
+            <h3>{"Welcome "}</h3>
             <ul className="navLinks">
                 <Link style={navStyle} to="">
                     <li style={navStyle}>Home</li>
