@@ -11,12 +11,23 @@ import CreateSurvey from './pages/CreateSurvey';
 import Login from '../src/pages/login';
 import { AuthService } from './services/authService';
 import SignInSide from '../src/pages/login';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
+const theme = createMuiTheme({
+    typography: {
+      fontFamily: [
+        'Manrope',
+        'sans-serif',
+      ].join(','),
+    },
+});
 
 function App() {
   
   
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       <Router>
       <Switch>
@@ -33,6 +44,7 @@ function App() {
       </Switch>
       </Router>
     </div>
+    </ThemeProvider>
   );
 }
 

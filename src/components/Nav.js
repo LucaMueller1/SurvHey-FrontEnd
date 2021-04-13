@@ -7,7 +7,8 @@ import { requestService } from '../services/requestService'
 
 export function Nav() {
     const navStyle= {
-        color: "white"
+        color: "white",
+        textDecoration: "none"
     }
     
     const [user, setUser] = useState("");
@@ -15,20 +16,24 @@ export function Nav() {
 
     useEffect(() => {
         AuthInterceptor.intercept();
-        requestService.getSurveys().then(res => {
-          setUser("Test");
+        // TODO requestService.getSurveys().then(res => {
+        //   setUser(res.data[0][ 'user']);
            
-        }
+        // }
             
-            );
+        //     );
         
     }, []);
 
     
     
     return (
-        <nav>
-            <h3>{"Welcome "}</h3>
+        <nav style={navStyle}>
+            <Link style={navStyle} to="">
+            <h1 style={{fontSize: "24pt"}}>SurvHey</h1>
+                </Link>
+            
+            {/* TODO <h3>{"Welcome " + user.firstName}</h3> */}
             <ul className="navLinks">
                 <Link style={navStyle} to="">
                     <li style={navStyle}>Home</li>

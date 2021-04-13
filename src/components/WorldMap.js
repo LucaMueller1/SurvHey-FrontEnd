@@ -23,7 +23,7 @@ const geoUrl =
 const customScale = scaleLinear([0,1000], ["#fff33b","#e93e3a"])
 
 const MapChart = ({ setTooltipContent }) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
   let {id} = useParams();
 
   useEffect(async () => {
@@ -39,7 +39,7 @@ const MapChart = ({ setTooltipContent }) => {
       <ComposableMap  data-tip=""
           style={{
             width: "100%",
-            height: "auto"
+            height: "100%"
           }}>
         <ZoomableGroup>
         <Geographies geography={geoUrl}>

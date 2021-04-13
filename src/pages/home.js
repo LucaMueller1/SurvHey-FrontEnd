@@ -10,13 +10,13 @@ import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import Grow from '@material-ui/core/Grow';
 import PaperSurveyItem from '../components/PaperSurveyItem';
-
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
       padding: theme.spacing(2),
-      paddingLeft: '200px',
+      paddingLeft: '12%',
       height: '100%',
       width: '100%'
     },
@@ -30,10 +30,14 @@ const useStyles = makeStyles((theme) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "#00a86b",
+      color: "white",
+      background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
+    },
+    createNew: {
+        transition: "all .5s ease-in-out;",
       "&:hover": {
-        backgroundColor: "white",
-        cursor: "pointer"
+        cursor: "pointer",
+        transform: "scale(1.1)"
       }
     }
 }));
@@ -43,6 +47,7 @@ export function Home() {
     const [surveyList, setSurveyList] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const history = useHistory();
 
     const fetchData = async () => {
         setIsError(false);
@@ -75,8 +80,8 @@ export function Home() {
             <Grid container spacing={2} direction="row">
                     <Grid container item xs={2} spacing={1}>
                         <Grow in={true}>
-                            <Paper className={classes.paper} onClick={() => {document.location.href = "/CreateSurvey"}}>
-                                <Box>
+                            <Paper className={classes.paper} onClick={() => {history.push("/CreateSurvey")}}>
+                                <Box className={classes.createNew}>
                                     <Typography gutterBottom variant="h6">
                                         Create New
                                     </Typography>
