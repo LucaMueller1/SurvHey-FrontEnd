@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
       //maxHeight: 120,
       height: '120px',
       width: '180px',
-      //display: "flex",
-      //justifyContent: "center",
-      //alignItems: "center",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       color: "white",
       background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
     },
@@ -67,7 +67,6 @@ export function Home() {
     };
 
     useEffect(() => {
-        document.body.style = 'background: #282c34';
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {

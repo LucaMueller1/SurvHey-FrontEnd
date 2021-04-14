@@ -24,7 +24,7 @@ export function SurveyIFrame() {
         requestService.getSurveyById(id).then(res => {
             console.log(res.data);
             setSurvey(res.data);
-            document.body.style = 'background: ' + (res.data.backgroundColor == null ? "#282c34" : res.data.backgroundColor);
+            //document.body.style = 'background: ' + (res.data.backgroundColor == null ? "#282c34" : res.data.backgroundColor);
         }).catch(err => {
             console.log(err);
             setSurvey(null);
@@ -42,7 +42,7 @@ export function SurveyIFrame() {
                 <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions}/>
                 <br></br>
                 <div>
-                    <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Datarules
+                    <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Privacy
                     </Button>
                     <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
                         <p id="popup-text">Datenschutz-Regeln</p>
