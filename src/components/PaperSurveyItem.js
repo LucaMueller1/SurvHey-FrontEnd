@@ -60,7 +60,7 @@ function PaperSurveyItem(props) {
     const classes = useStyles();
 
     const clickExport = () => {
-        document.location.href = "/Survey/" + props.survey.id;
+        document.location.href = "/ExportSurvey/" + props.survey.id;
     }
 
     const clickEdit = () => {

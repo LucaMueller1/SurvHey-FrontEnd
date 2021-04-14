@@ -11,7 +11,6 @@ import AddIcon from '@material-ui/icons/Add';
 import Grow from '@material-ui/core/Grow';
 import PaperSurveyItem from '../components/PaperSurveyItem';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -60,6 +59,7 @@ export function Home() {
     };
 
     useEffect(() => {
+        document.body.style = 'background: #282c34';
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {

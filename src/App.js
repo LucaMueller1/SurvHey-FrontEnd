@@ -14,8 +14,6 @@ import SignInSide from '../src/pages/login';
 
 
 function App() {
-  
-  
   return (
     <div>
       <Router>
@@ -24,7 +22,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={Home}/>
               <Route path="/CreateSurvey" component={CreateSurvey} />
-              <Route path="/ExportSurvey" component={ExportSurvey} />
+              <Route path="/ExportSurvey/:id" component={ExportSurvey} />
               <Route path="/AnalyseSurvey/:id" component={AnalyseSurvey}/>
               <Route path="/Survey/:id" component={SurveyIFrame}/>
               <Route path="/login" component={SignInSide}/>

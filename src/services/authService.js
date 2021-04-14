@@ -9,6 +9,7 @@ export class AuthService {
           if(res.data) {
               console.log("Setting auth-token");
               this.setToken(res.data.authKey);
+              this.setUserName(res.data.user.firstName);
               document.location.href="/";
           }
       }).catch(error => {
@@ -26,6 +27,14 @@ export class AuthService {
 
   static getToken() {
     return localStorage.getItem("api_key");
+  }
+
+  static setUserName(userName) {
+    localStorage.setItem("user_name", userName);
+  }
+
+  static getUserName() {
+    return localStorage.getItem("user_name");
   }
 
   static removeToken() {
