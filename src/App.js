@@ -11,25 +11,38 @@ import CreateSurvey from './pages/CreateSurvey';
 import Login from '../src/pages/login';
 import { AuthService } from './services/authService';
 import SignInSide from '../src/pages/login';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
+const theme = createMuiTheme({
+    typography: {
+      fontFamily: [
+        'Manrope',
+        'sans-serif',
+      ].join(','),
+    },
+});
 
 function App() {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
+    <div className="App">
       <Router>
-      <Nav/>
-        <div className="App" >
-            <Switch>
-              <Route path="/" exact component={Home}/>
-              <Route path="/CreateSurvey" component={CreateSurvey} />
-              <Route path="/ExportSurvey/:id" component={ExportSurvey} />
-              <Route path="/AnalyseSurvey/:id" component={AnalyseSurvey}/>
-              <Route path="/Survey/:id" component={SurveyIFrame}/>
-              <Route path="/login" component={SignInSide}/>
-            </Switch>
+      <Switch>
+        <Route path="/login" component={SignInSide}/>
+        <div>
+           <Nav/>
+
+            <Route path="/" exact component={Home}/>
+            <Route path="/CreateSurvey" component={CreateSurvey} />
+            <Route path="/ExportSurvey" component={ExportSurvey} />
+            <Route path="/AnalyseSurvey/:id" component={AnalyseSurvey}/>
+            <Route path="/Survey/:id" component={SurveyIFrame}/>
         </div>
+      </Switch>
       </Router>
     </div>
+    </ThemeProvider>
   );
 }
 

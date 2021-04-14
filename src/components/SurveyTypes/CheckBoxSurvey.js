@@ -3,6 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { FormControl, FormGroup, FormLabel, FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 import { requestService } from '../../services/requestService';
 import { Button} from '@material-ui/core';
+import { AuthInterceptor } from '../../services/AuthInterceptor'
 
 
 export function CheckBoxSurvey(props){
@@ -11,15 +12,39 @@ export function CheckBoxSurvey(props){
     const [id, setId] = useState(props.id);
     const [toggle, setToggle] = useState(false);
 
+    const [results, setResults] = useState([]);
+    const [resultSum, setResultSum] = useState(0);
+
     useEffect(() => {
       let ids = {};
       props.answerOptions.map(answer => {
         ids[answer.id] = false;
       });
       setSelectedIDs(ids);
-      console.log(selectedIDs);
     }, []);
+
+    useEffect(() => {
+      AuthInterceptor.intercept();
+      requestService.getResults(id).then(res => {
+          setResults(Object.entries(res.data.choices));
+          console.log(res);
+      }
+          
+          );
+      getResultSum();
+      console.log(results)
+      
+  }, []);
     
+  const getResultSum =async () => {
+    await requestService.getAnalysis(id).then(res => {
+        setResultSum(res.data.amount);
+        console.log(res.data.amount);
+    }).catch( error => {
+        console.log(error);
+    });
+ }
+
     const openSurvey= e => {
       setToggle(true);
     }
@@ -84,7 +109,7 @@ export function CheckBoxSurvey(props){
     const answers = props.answerOptions.map((answer, index) => {
       return (
   
-        <FormControlLabel key={answer.id} value={answer.id} control={<Checkbox />} label={answer.content} />
+        <FormControlLabel key={answer.id} value={answer.id} control={<Checkbox />} label={answer.content}/>
   
       );
       });
@@ -107,7 +132,7 @@ export function CheckBoxSurvey(props){
                   {answers}
                 </FormGroup>
               </FormControl>
-              
+              <br></br>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
               <Button variant="contained" onClick={getResults}>Analyse Survey</Button>
           </form>

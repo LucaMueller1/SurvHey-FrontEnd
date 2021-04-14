@@ -38,6 +38,7 @@ export class requestService {
         return axios.delete(environment.backEndUrl + "/survey/" + id);
     }
 
+    //returns true if submission was posted successfully and false if not
     static async postSubmisson(surveyId, selectedAnswerIDs){
         let ip = await trackingService.getClientIp();
         let trackingToken = trackingService.getTrackingToken();
@@ -53,13 +54,16 @@ export class requestService {
         }
 
         console.log(jsonBody);
-        return axios.post(environment.backEndUrl + "/survey/" + surveyId + "/submission", jsonBody, {headers: {"Content-Type": "application/json"}}).then(res => {
+        axios.post(environment.backEndUrl + "/survey/" + surveyId + "/submission", jsonBody, {headers: {"Content-Type": "application/json"}}).then(res => {
             if(res.data) {
                 console.log("Setting trackingToken to: " + res.data.participant.Cookie);
                 trackingService.setTrackingToken(res.data.participant.Cookie);
+                return true;
             }
         }).catch(error => {
             console.log("Failed send submission");
+            alert("You can only participate once!");
+            return true;
         });
         
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RadioSurvey from './RadioSurvey';
 import { CheckBoxSurvey } from './CheckBoxSurvey';
-
+import {ResultsChart} from '../ResultChart';
 
 //SurveyTypeChooser should conditonally render the appropriate Survey to each SurveyType;
 //Check the survey mode from the API´s SurveyList and renders the appropriate Survey 
@@ -9,17 +9,20 @@ import { CheckBoxSurvey } from './CheckBoxSurvey';
 export function SurveyTypeChooser(props) {
 
   const [surveyType, setSurveytype] = useState();
+  const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
     setSurveytype(props.surveyType);
     console.log(props.surveyType);
   }, [props]);
   
+  
 
   if(surveyType === "RADIO"){
          return(
             <div>
-              <RadioSurvey id={props.id} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions}/>
+              <RadioSurvey id={props.id} showResultChart={() => {setShowResults(true)}} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions}/>
+              {showResults ? <ResultsChart id={props.id}/> : null }
             </div>
         );
   } else if(surveyType === "CHECK"){

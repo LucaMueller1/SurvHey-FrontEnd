@@ -19,16 +19,17 @@ function SliderBar() {
         AuthInterceptor.intercept();
         requestService.getResults(id).then(res => {
             setResults(Object.entries(res.data.choices));
-        }
-            
-            );
-        getResultSum();
+            getResultSum();
+        }).catch(error => {
+            console.log(error);
+        });
+        
         
     }, []);
 
-    useEffect(() => {
+    useEffect( () => {
         query();
-      }, [results, resultSum]);
+      }, [resultSum]);
 
      function query() {
         $('.skill-per').each(function(){
@@ -48,7 +49,7 @@ function SliderBar() {
      }
 
       const getResultSum =async () => {
-        await requestService.getAnalysis(id).then(res => {
+        requestService.getAnalysis(id).then(res => {
             setResultSum(res.data.amount);
             console.log(res.data.amount);
         }).catch( error => {
@@ -56,7 +57,7 @@ function SliderBar() {
         });
      }
 
-     const test = results.map((choice, index) => {
+     const sliderBars = results.map((choice, index) => {
          console.log(results);
         return (
             <div key={index} className="skills">
@@ -73,7 +74,7 @@ function SliderBar() {
      //map trough results array --> for each choice we want to return a skills object with custom per and Name
         return (
             <div className="sliderContainer">
-                    <div>{test}</div>
+                    <div>{sliderBars}</div>
             </div>
         );
         
