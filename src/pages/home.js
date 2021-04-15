@@ -9,22 +9,24 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import Grow from '@material-ui/core/Grow';
+import Container from '@material-ui/core/Container'
 import PaperSurveyItem from '../components/PaperSurveyItem';
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+      //flexGrow: 1,
       padding: theme.spacing(2),
-      paddingLeft: '12%',
-      height: '100%',
-      width: '100%'
+      //paddingLeft: '12%',
+      //margin: '1%',
+      //height: '100%',
+      //width: '100%'
     },
     paper: {
       padding: theme.spacing(2),
-      margin: 'auto',
-      maxWidth: 180,
-      maxHeight: 120,
+      //margin: 'auto',
+      //maxWidth: 180,
+      //maxHeight: 120,
       height: '120px',
       width: '180px',
       display: "flex",
@@ -77,7 +79,8 @@ export function Home() {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={2} direction="row">
+            <Container maxWidth={false}>
+            <Grid container container spacing={3} xs={12} direction="row">
                     <Grid container item xs={2} spacing={1}>
                         <Grow in={true}>
                             <Paper className={classes.paper} onClick={() => {history.push("/CreateSurvey")}}>
@@ -96,6 +99,7 @@ export function Home() {
                         </Grid>
                     ))}
             </Grid>
+            </Container>
         </div>
     )
 

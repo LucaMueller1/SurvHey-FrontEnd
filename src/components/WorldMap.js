@@ -20,18 +20,20 @@ margin: "0 auto",
 const geoUrl =
 "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
-const customScale = scaleLinear([0,1000], ["#fff33b","#e93e3a"])
+const customScale = scaleLinear([0,15], ["#fff33b","#e93e3a"])
 
 const MapChart = ({ setTooltipContent }) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState();
   let {id} = useParams();
 
-  useEffect(async () => {
 
+  useEffect(() => {
     AuthInterceptor.intercept();
-        await requestService.getAnalysis(id).then(res => {
+    requestService.getAnalysis(id).then(res => {
             setData(Object.entries(res.data.countries));
-        });
+        }).catch(error => {
+          console.log(error);
+      });
   }, []);
 
   return (

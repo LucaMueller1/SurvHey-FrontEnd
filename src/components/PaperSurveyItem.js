@@ -62,7 +62,7 @@ function PaperSurveyItem(props) {
     const history = useHistory();
 
     const clickExport = () => {
-        history.push("/Survey/" + props.survey.id);
+        history.push("/ExportSurvey/" + props.survey.id);
     }
 
     const clickEdit = () => {

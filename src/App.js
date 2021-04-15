@@ -24,22 +24,20 @@ const theme = createMuiTheme({
 });
 
 function App() {
-  
-  
   return (
     <ThemeProvider theme={theme}>
     <div className="App">
       <Router>
       <Switch>
         <Route path="/login" component={SignInSide}/>
+        <Route path="/Survey/:id" component={SurveyIFrame}/>
         <div>
            <Nav/>
 
             <Route path="/" exact component={Home}/>
             <Route path="/CreateSurvey" component={CreateSurvey} />
-            <Route path="/ExportSurvey" component={ExportSurvey} />
+            <Route path="/ExportSurvey/:id" component={ExportSurvey} />
             <Route path="/AnalyseSurvey/:id" component={AnalyseSurvey}/>
-            <Route path="/Survey/:id" component={SurveyIFrame}/>
         </div>
       </Switch>
       </Router>
