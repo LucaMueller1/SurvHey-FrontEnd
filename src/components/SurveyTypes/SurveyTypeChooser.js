@@ -27,7 +27,10 @@ export function SurveyTypeChooser(props) {
         );
   } else if(surveyType === "CHECK"){
     return(
-      <CheckBoxSurvey id={props.id} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions}/>
+      <div>
+        <CheckBoxSurvey id={props.id} showResultChart={() => {setShowResults(true)}} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions}/>
+        {showResults ? <ResultsChart id={props.id}/> : null }
+      </div>
     );
   } else {
     return(

@@ -41,10 +41,10 @@ export function SurveyIFrame() {
                 <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions}/>
                 <br></br>
                 <div>
-                    <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Datarules
+                    <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Data-Privacy
                     </Button>
                     <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
-                        <p id="popup-text">Datenschutz-Regeln</p>
+                        <p id="popup-text">Datenschutz-Regeln...</p>
                     </PopUp>
                 </div>
             </div>
