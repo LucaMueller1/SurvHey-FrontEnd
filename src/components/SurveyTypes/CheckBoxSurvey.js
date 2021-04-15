@@ -75,6 +75,7 @@ export function CheckBoxSurvey(props){
       console.log(arr);
       
       requestService.postSubmisson(id, toAnswerOptionIDs(arr));
+      props.showResultChart();
       console.log("submisson posted");
       
     }

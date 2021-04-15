@@ -45,7 +45,7 @@ export function SurveyIFrame() {
                     <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Privacy
                     </Button>
                     <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
-                        <p id="popup-text">Datenschutz-Regeln</p>
+                        <p id="popup-text">Datenschutz-Regeln...</p>
                     </PopUp>
                 </div>
             </div>

@@ -80,11 +80,12 @@ input[type=text]{
 }
 
 .resultPieChart {
-  display: block;
+  display: inline-block;
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 20px;
   margin-right: 20px;
+  align-self: center;
 }
 
 .pieChartContainer {

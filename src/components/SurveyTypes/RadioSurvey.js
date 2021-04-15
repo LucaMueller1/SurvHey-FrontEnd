@@ -45,21 +45,6 @@ function RadioSurvey(props) {
 
     );
     });
-
-    /*  
-    <label key={index}>
-        <Radio key={index} id={index} type="radio" value={answer.id} checked={selectedAnswerId == answer.id} onChange={onValueChange}/>
-      {answer.content}
-      <br></br>
-      </label>
-    */
-
-      /*
-       <h3>{"AntwortContent" + results[0][0] }</h3>
-                <h3>{"Anzahl:" + results[0][1]}</h3>
-                <h3>{"Gesamte Antworten:" + resultSum}</h3>
-                <h3>{"Antworten in Prozent:" + (results[0][1] / resultSum) * 100 + "%"}</h3>
-      */
   
     if(toggle === false){
         return(
