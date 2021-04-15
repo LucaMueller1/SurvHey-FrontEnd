@@ -116,7 +116,7 @@ class SurveyCreator extends React.Component {
     if(this.state.phase === 1){
       return (
         <div>
-          <input type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
+          <input style={{width: "20%"}} type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
           <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
         </div>
       );
@@ -126,7 +126,7 @@ class SurveyCreator extends React.Component {
       return (
       <div>
         <h3>{this.state.surveyName}</h3>
-        <input type="text" value={this.state.questionText} onChange={this.onChangeQuestionText}></input>
+        <input style={{width: "20%"}} type="text" value={this.state.questionText} onChange={this.onChangeQuestionText}></input>
         <br></br>
         <label for="optionSelect">Choose answer option type</label>
         <select id="optionSelect" onChange={this.onSurveyTypeChange}> 
@@ -147,7 +147,7 @@ class SurveyCreator extends React.Component {
         <h3>{this.state.surveyName}</h3>
         <h3>{this.state.questionText}</h3>
         <label>Enter an answer Option</label>
-        <input type="text" onChange={this.saveInput}></input>
+        <input style={{width: "20%"}} type="text" onChange={this.saveInput}></input>
         <Button
           variant="contained"
           color="primary"
