@@ -70,7 +70,7 @@ export function Home() {
         AuthInterceptor.intercept();
         //check if authenticated
         if(!AuthService.getToken()) {
-            document.location.href="/login";
+            history.push("/login");
         } else {
             fetchData();
         }

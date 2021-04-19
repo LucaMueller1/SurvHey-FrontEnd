@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormLabel, FormControlLabel, Radio, RadioGroup}
 import { requestService } from '../../services/requestService';
 import { Button} from '@material-ui/core';
 import { AuthInterceptor } from '../../services/AuthInterceptor'
+import { useHistory } from "react-router";
 
 
 export function CheckBoxSurvey(props){
@@ -14,6 +15,8 @@ export function CheckBoxSurvey(props){
 
     const [results, setResults] = useState([]);
     const [resultSum, setResultSum] = useState(0);
+
+    const history = useHistory();
 
     useEffect(() => {
       let ids = {};
@@ -55,7 +58,8 @@ export function CheckBoxSurvey(props){
     }
   
     const getResults = e => {
-      document.location.href="/AnalyseSurvey/" + props.id;
+      //document.location.href="/AnalyseSurvey/" + props.id;
+      history.push("/AnalyseSurvey/" + props.id);
     }
   
   

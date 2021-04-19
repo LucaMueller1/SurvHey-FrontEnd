@@ -4,6 +4,7 @@ import { Button} from '@material-ui/core';
 import Radio from '@material-ui/core/Radio';
 import { FormControl, RadioGroup, FormControlLabel} from "@material-ui/core";
 import { AuthInterceptor } from '../../services/AuthInterceptor';
+import { useHistory } from "react-router";
 
 
 function RadioSurvey(props) {
@@ -11,6 +12,8 @@ function RadioSurvey(props) {
   const [selectedAnswerId, setSelectedAnswerId] = useState(-1);
   const [id, setId] = useState(props.id);
   const [toggle, setToggle] = useState(false);
+
+  const history = useHistory();
   
   
   const openSurvey= e => {
@@ -22,7 +25,8 @@ function RadioSurvey(props) {
   }
 
   const getResults = e => {
-    document.location.href="/AnalyseSurvey/" + props.id;
+    //document.location.href="/AnalyseSurvey/" + props.id;
+    history.push("/AnalyseSurvey/" + props.id);
   }
 
 

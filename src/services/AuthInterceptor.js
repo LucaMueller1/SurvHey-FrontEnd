@@ -4,6 +4,7 @@ import { AuthService } from './authService';
 export class AuthInterceptor {
 
     static intercept() {
+        
         console.log("Request Interceptor start");
         axios.interceptors.response.use(function (response) {
             //everything is ok. Response Code: 2XX

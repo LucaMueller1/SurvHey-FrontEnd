@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# SurvHey Front-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the Front-End of the awesome SurvHey project.
+
+## Run with NGINX Webserver in Docker
+```sh
+docker build -t survhey-frontend .
+docker run -d --name survhey-frontend -p 80:80 survhey-frontend
+```
+The webserver is available under localhost in your browser.
 
 ## Available Scripts
 
