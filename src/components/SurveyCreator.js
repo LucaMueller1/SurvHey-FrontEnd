@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
+import { SketchPicker } from 'react-color'
 
 
 
@@ -35,6 +36,7 @@ class SurveyCreator extends React.Component {
       phase: 0,
       answerOptions: [],
       selectedOption: "",
+      background: '#fff'
      
     };
     this.formSubmit = this.formSubmit.bind(this);
@@ -99,6 +101,10 @@ class SurveyCreator extends React.Component {
     answerOptions.push(input);
     this.setState({answerOptions: answerOptions})
   };
+
+  handleChangeComplete = (color) => {
+    this.setState({ background: color.hex });
+  };
 //axios library --> eigene JS Methode
 
 //SequenzDiagramm --> Verschiedene Phasen
@@ -118,6 +124,9 @@ class SurveyCreator extends React.Component {
         <div>
           <input style={{width: "20%"}} type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
           <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
+          <h3>Select a color theme:</h3>
+          <SketchPicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          <h3>Color is {this.state.background}</h3>
         </div>
       );
     }

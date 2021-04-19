@@ -45,7 +45,7 @@ export function SurveyIFrame() {
                     <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Privacy
                     </Button>
                     <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
-                        <p id="popup-text">Datenschutz-Regeln...</p>
+                        <p id="popup-text">A data processing agreement (DPA) between you and the website owner mentioning SurvHey as sub-contractor is necessary. A DPA between you and SurvHey is necessary as well. The website owner is responsible for consent banners. For further information see GDPR, especially Art.28 </p>
                     </PopUp>
                 </div>
             </div>
