@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import ResultTable from '../components/ResultTable';
 import SliderBar from '../components/SliderBar';
 import MapChart from '../components/WorldMap';
 import ReactTooltip from "react-tooltip";
@@ -64,6 +65,12 @@ const useStyles = makeStyles((theme) => ({
                     <Paper className={classes.paper} m={300}>
                         <MapChart setTooltipContent={setContent}/>
                         <ReactTooltip>{content}</ReactTooltip>
+                    </Paper>
+                 </Grid>
+                 <Grid item>
+                 <h3>Absolute Numbers</h3>
+                    <Paper className={classes.paper} m={300}>
+                        <ResultTable classPaper={classes.paper}/>
                     </Paper>
                  </Grid>
              </Grid>

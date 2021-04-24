@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect} from 'react';
+import React, {Component, useState, useEffect, useLayoutEffect} from 'react';
 import { requestService } from '../services/requestService';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 import { useParams } from "react-router";
@@ -27,16 +27,17 @@ const MapChart = ({ setTooltipContent }) => {
   let {id} = useParams();
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     AuthInterceptor.intercept();
     requestService.getAnalysis(id).then(res => {
             setData(Object.entries(res.data.countries));
+            console.log("done")
         }).catch(error => {
           console.log(error);
       });
   }, []);
 
-  return (
+  if (data !== undefined) {return (
     <div style={wrapperStyles}>
       <ComposableMap  data-tip=""
           style={{
@@ -90,7 +91,11 @@ const MapChart = ({ setTooltipContent }) => {
         </ZoomableGroup>
       </ComposableMap>
     </div>
-  );
+  );}
+
+  return (<div>loading</div>);
+
+  
 };
 
 export default MapChart;
