@@ -41,6 +41,7 @@ class SurveyCreator extends React.Component {
     };
     this.formSubmit = this.formSubmit.bind(this);
     this.onChangeSurveyName = this.onChangeSurveyName.bind(this);
+    this.goBack = this.goBack.bind(this);
     this.switchPhase = this.switchPhase.bind(this);
     this.onChangeQuestionText = this.onChangeQuestionText.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
@@ -81,6 +82,12 @@ class SurveyCreator extends React.Component {
     });
   }
 
+  goBack(event) {
+    this.setState({
+      phase: event.target.value = this.state.phase - 1
+    });
+  }
+
   onChangeSurveyName(event) {
     this.setState({
         surveyName: event.target.value
@@ -105,6 +112,14 @@ class SurveyCreator extends React.Component {
   handleChangeComplete = (color) => {
     this.setState({ background: color.hex });
   };
+
+  cancelOptionInput = () => { 
+    document.getElementById("option-input").value = "";
+  }
+  onClickInputButton = (event) => {
+    this.addNewItem();
+    this.cancelOptionInput();
+  }
 //axios library --> eigene JS Methode
 
 //SequenzDiagramm --> Verschiedene Phasen
@@ -125,7 +140,9 @@ class SurveyCreator extends React.Component {
           <input style={{width: "20%"}} type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
           <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
           <h3>Select a color theme:</h3>
-          <SketchPicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          <div style={{display: "inline-block"}}>
+          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          </div>
           <h3>Color is {this.state.background}</h3>
         </div>
       );
@@ -134,6 +151,7 @@ class SurveyCreator extends React.Component {
     else if(this.state.phase === 2) {
       return (
       <div>
+        <Button variant="contained" onClick={this.goBack}>go back</Button>
         <h3>{this.state.surveyName}</h3>
         <input style={{width: "20%"}} type="text" value={this.state.questionText} onChange={this.onChangeQuestionText}></input>
         <br></br>
@@ -153,15 +171,16 @@ class SurveyCreator extends React.Component {
     else if(this.state.phase === 3) {
       return (
       <div>
+        <Button variant="contained" onClick={this.goBack}>go back</Button>
         <h3>{this.state.surveyName}</h3>
         <h3>{this.state.questionText}</h3>
         <label>Enter an answer Option</label>
-        <input style={{width: "20%"}} type="text" onChange={this.saveInput}></input>
+        <input id="option-input" style={{width: "20%"}} type="text" onChange={this.saveInput}></input>
         <Button
           variant="contained"
           color="primary"
           startIcon={<Icon>add_circle</Icon>}
-          onClick={this.addNewItem}
+          onClick={this.onClickInputButton}
         >
           Add answer
       </Button>
@@ -179,6 +198,7 @@ class SurveyCreator extends React.Component {
     else if(this.state.phase === 4){
       return (
         <form>
+          <Button variant="contained" onClick={this.goBack}>go back</Button>
           <h3>Title: {this.state.surveyName}</h3>
           <h3>Question: {this.state.questionText}</h3>
           <h3>AnswerOptions:</h3>
