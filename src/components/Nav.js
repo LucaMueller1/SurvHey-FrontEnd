@@ -16,13 +16,6 @@ export function Nav() {
 
     useEffect(() => {
         AuthInterceptor.intercept();
-        // TODO requestService.getSurveys().then(res => {
-        //   setUser(res.data[0][ 'user']);
-           
-        // }
-            
-        //     );
-        
     }, []);
 
     
