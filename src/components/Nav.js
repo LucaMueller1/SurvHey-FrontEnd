@@ -7,6 +7,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
 import { useHistory } from "react-router";
 import { AuthService } from '../services/authService';
+import Logo from '../media/SurvHeyLogo.png';
 
 
 export function Nav() {
@@ -50,7 +51,9 @@ export function Nav() {
                 </IconButton>
 
                 <Link style={navTitle} to="">
-                    <Typography variant="h4">SurvHey</Typography>
+                    
+                    <Typography variant="h4">SurvHey<img src={Logo} style={{width: "100px"}, {height: "100px"}} align="middle" alt="SurvHeyLogo"/></Typography>
+                    
                 </Link>
 
                 <IconButton edge="end" onClick={logout}>
