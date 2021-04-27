@@ -16,14 +16,16 @@ import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
     root: {
       //flexGrow: 1,
-      padding: theme.spacing(2),
+      //padding: theme.spacing(2),
       //paddingLeft: '12%',
       //margin: '1%',
-      //height: '100%',
-      //width: '100%'
+      //height: '120px',
+      //width: '180px'
     },
     paper: {
       padding: theme.spacing(2),
+      marginLeft: "2%",
+      marginTop: "2%",
       //margin: 'auto',
       //maxWidth: 180,
       //maxHeight: 120,
@@ -80,8 +82,7 @@ export function Home() {
     return (
         <div className={classes.root}>
             <Container maxWidth={false}>
-            <Grid container container spacing={3} xs={12} direction="row">
-                    <Grid container item xs={2} spacing={1}>
+            <Grid container spacing={3}>
                         <Grow in={true}>
                             <Paper className={classes.paper} onClick={() => {history.push("/CreateSurvey")}}>
                                 <Box className={classes.createNew}>
@@ -92,11 +93,11 @@ export function Home() {
                                 </Box>
                             </Paper>
                         </Grow>
-                    </Grid>
+                    
                     {surveyList.map(survey => (
-                        <Grid container item xs={2} spacing={1}>
+                       
                             <PaperSurveyItem survey={survey}></PaperSurveyItem>
-                        </Grid>
+                        
                     ))}
             </Grid>
             </Container>

@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { SketchPicker } from 'react-color'
 import Card from '@material-ui/core/Card';
+import Divider from '@material-ui/core/Divider';
 
 
 
@@ -146,13 +147,15 @@ class SurveyCreator extends React.Component {
       return (
         <div>
           <Card className={classes.paper}><h3>1/5</h3></Card>
-          <h2>Survey Name:</h2>
+          
           <Card className={classes.inputField}>
-          <TextField  variant="outlined" value={this.state.surveyName} onChange={this.onChangeSurveyName}></TextField>
-          </Card>
-          <div style={{marginTop:"2%"}}>
+          <h2>Survey Name:</h2>
+          <TextField InputProps={{style: {color: "white"}}} variant="outlined" value={this.state.surveyName} onChange={this.onChangeSurveyName}></TextField>
+          
+          <div style={{marginTop:"10%"}}>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
         </div>
+        </Card>
         </div>
       );
     }
@@ -161,15 +164,17 @@ class SurveyCreator extends React.Component {
       return (
         <div>
           <Card className={classes.paper}><h3>2/5</h3></Card>
+          <Card className={classes.inputField}>
           <h2>Background Color:</h2>
           <div style={{display: "inline-block"}}>
           <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
           </div>
           <h3>Color is {this.state.background}</h3>
-          <div style={{marginTop:"2%"}}>
+          <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
         </div>
+        </Card>
         </div>
       );
     }
@@ -178,15 +183,17 @@ class SurveyCreator extends React.Component {
       return (
         <div>
           <Card className={classes.paper}><h3>3/5</h3></Card>
+          <Card className={classes.inputField}>
           <h2>Accent Color:</h2>
           <div style={{display: "inline-block"}}>
           <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
           </div>
           <h3>Color is {this.state.background}</h3>
-          <div style={{marginTop:"2%"}}>
+          <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
         </div>
+        </Card>
         </div>
       );
     }
@@ -195,30 +202,29 @@ class SurveyCreator extends React.Component {
       return (
       <div>
         <Card className={classes.paper}><h3>4/5</h3></Card>
+        <Card className={classes.inputField}>
         <h2>Survey Question:</h2>
-        <Card className={classes.inputField}>
-          <TextField  variant="outlined" value={this.state.questionText} onChange={this.onChangeQuestionText}></TextField>
-        </Card>
+          <TextField  InputProps={{style: {color: "white"}}} variant="outlined" value={this.state.questionText} onChange={this.onChangeQuestionText}></TextField>
         <h2>Survey Type:</h2>
-        <Card className={classes.inputField}>
         <Select
           label = "Survey Type"
           id="optionSelect"
           value={this.selectedSurveyType}
           onChange={this.onSurveyTypeChange}
           defaultValue={"radio"}
+          style={{marginBottom: "10%", color:"white"}}
+          InputProps={{style: {color: "white"}}}
         >
           <MenuItem value={"radio"}>Radio</MenuItem>
           <MenuItem value={"check"}>Checkbox</MenuItem>
         </Select>
-        <div>{this.selectedSurveyType}</div>
-        </Card>
-  
-        <div style={{marginTop:"2%"}}>
+        
+        <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
         </div>
-      </div>
+        </Card>
+              </div>
      
     );}
 
@@ -226,9 +232,9 @@ class SurveyCreator extends React.Component {
       return (
       <div>
         <Card className={classes.paper}><h3>5/5</h3></Card>
-        <h2>Answer Options:</h2>
         <Card className={classes.inputField}>
-          <TextField id="option-input" variant="outlined" onChange={this.saveInput}></TextField>
+        <h2>Answer Options:</h2>
+          <TextField InputProps={{style: {color: "white"}}} id="option-input" defaultValue="" variant="outlined" onChange={this.saveInput}></TextField>
           <Button
           variant="contained"
           color="primary"
@@ -237,17 +243,17 @@ class SurveyCreator extends React.Component {
         >
           Add Option
       </Button>
-        </Card>
         
         <br></br>
         <h3>Your Options:</h3>
           {this.state.answerOptions.map((subItems, sIndex) => {
             return <div key={sIndex}> {subItems} </div>
           })}
-       <div style={{marginTop:"2%"}}>
+       <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Show SurvHey</Button>
         </div>
+        </Card>
         </div>
      
     );}
@@ -257,18 +263,18 @@ class SurveyCreator extends React.Component {
       return (
         <form>
           <Card className={classes.paper}><h3>Survey Preview</h3></Card>
+          <Card className={classes.inputField}>
 
-          <h2>Survey Title:</h2>
-          <Card className={classes.surveyPreview}><h3>{this.state.surveyName}</h3></Card>
-          
-          <h2>Survey Question:</h2>
-          <Card className={classes.surveyPreview}><h3>{this.state.questionText}</h3></Card>
-          
-          <h2>Survey Type:</h2>
-          <Card className={classes.surveyPreview}><h3>{this.state.selectedSurveyType}</h3></Card>
-          
+          <h3>Title:</h3>
+          <h2>{this.state.surveyName}</h2>
+          <Divider/>
+          <h3>Question:</h3>
+          <h2>{this.state.questionText}</h2>
+          <Divider/>
+          <h3>Type:</h3>
+          <h2>{this.state.selectedSurveyType}</h2>
+          <Divider/>
           <h2>Answer Options:</h2>
-          <Card className={classes.surveyPreview}>
           {this.state.answerOptions.map((opt, index) => {
             return (
               <div>
@@ -276,11 +282,11 @@ class SurveyCreator extends React.Component {
               </div>
             )
           })}
-          </Card>
-          <div style={{marginTop:"2%"}}>
+          <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" type="submit" onClick={this.formSubmit}>Submit Survey</Button>
         </div>
+        </Card>
         </form>
       );
     }

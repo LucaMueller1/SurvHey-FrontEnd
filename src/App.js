@@ -13,6 +13,7 @@ import { AuthService } from './services/authService';
 import SignInSide from '../src/pages/login';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { green, lightGreen } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
     typography: {
@@ -21,6 +22,12 @@ const theme = createMuiTheme({
         'sans-serif',
       ].join(','),
     },
+    palette: {
+      primary: lightGreen
+    },
+    input: {
+      color: "white"
+    }
 });
 
 function App() {

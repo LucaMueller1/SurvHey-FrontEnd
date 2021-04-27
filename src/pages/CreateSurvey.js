@@ -14,14 +14,16 @@ const useStyles = makeStyles((theme) => ({
     paper: {
       color: "white",
       background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
+      marginBottom: "2%"
     },
     inputField: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         // height: '120px',
-        // width: '180px',
         display: "inline-block",
-        background: "white",
+        background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
         fontWeight: "bold",
+        color: "white"
+
       },
       surveyPreview: {
         paddingLeft: theme.spacing(2),
@@ -29,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
         display: "inline-block",
         background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
         fontWeight: "bold",
+        color: "white"
       },
   }));
 

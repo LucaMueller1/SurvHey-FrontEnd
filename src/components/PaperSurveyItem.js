@@ -18,11 +18,12 @@ import { useHistory } from "react-router";
 const useStyles = makeStyles((theme) => ({
     paper: {
       padding: theme.spacing(2),
-      margin: 'auto',
+      marginLeft: '2%',
+      marginTop: "2%",
       maxWidth: '180px',
       maxHeight: '120px',
       height: '120px',
-      width: '180px',
+      //width: '180px',
       alignItems: "center",
       justify: "center",
       "& .buttonMenu": {
@@ -30,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
       },
       "&:hover .buttonMenu": {
         display: "block"
+      },
+      "&:hover": {
+        borderStyle: "solid",
+        borderColor: "green"
       }
     },
     questionText: {
@@ -73,7 +78,7 @@ function PaperSurveyItem(props) {
         history.push("/AnalyseSurvey/" + props.survey.id);
     }
 
-    const [wrap, setWrap] = useState(false);
+    const [wrap, setWrap] = useState(true);
 
     const clickDelete = () => {
         requestService.deleteSurvey(props.survey.id).then(res => {
@@ -85,10 +90,10 @@ function PaperSurveyItem(props) {
 
     return(
     <Grow in={true}>
-        <Paper className={classes.paper} onMouseEnter={() => {setWrap(true)}} onMouseLeave={() => {setWrap(false)}}>
+        <Paper className={classes.paper} onMouseEnter={() => {setWrap(true)}} onMouseLeave={() => {setWrap(true)}}>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography gutterBottom noWrap={wrap} variant="subtitle2">
+                    <Typography gutterBottom noWrap={wrap} variant="h6">
                         {props.survey.name}
                     </Typography>
                     <Divider/>
