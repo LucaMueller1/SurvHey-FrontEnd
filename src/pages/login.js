@@ -74,10 +74,20 @@ export default function SignInSide() {
       e.preventDefault();
       console.log("login");
       AuthService.authenticate(email, password).then(res => {
-        console.log(res);
-      }).catch(error => {
-        console.log(error)
-      });
+        if(res.data) {
+            console.log("Setting auth-token");
+            AuthService.setToken(res.data.authKey);
+            AuthService.setUserName(res.data.user.firstName);
+            setWrongCred(false);
+            document.location.href = "/";
+        }
+    }).catch(error => {
+      console.log("Error during authentication");
+      if(error.response && error.response.status === 403) {
+        console.log("Wrong username or password");
+        setWrongCred(true);
+      }
+    })
   };
 
   const handleRegistration  = e => {

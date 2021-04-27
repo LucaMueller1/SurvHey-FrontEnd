@@ -5,21 +5,7 @@ import { requestService } from './requestService';
 export class AuthService {
 
   static async authenticate(email, password) {
-      requestService.loginUser(email, password).then(res => {
-          if(res.data) {
-              console.log("Setting auth-token");
-              this.setToken(res.data.authKey);
-              this.setUserName(res.data.user.firstName);
-              document.location.href = "/";
-              return Promise.resolve(true);
-          }
-      }).catch(error => {
-        console.log("Error during authentication");
-        if(error.response && error.response.status === 403) {
-          console.log("Wrong username or password");
-          return Promise.resolve(false);
-        }
-      })
+      return requestService.loginUser(email, password);
   }
 
   static logout() {

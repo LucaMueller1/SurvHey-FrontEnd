@@ -21,7 +21,7 @@ export class AuthInterceptor {
                 console.log(error.message);
             }
 
-            return(Promise.reject(error.message));
+            return(error);
         });
 
         //automatically add access_token to header for each request
