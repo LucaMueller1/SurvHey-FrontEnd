@@ -69,11 +69,16 @@ export default function SignInSide() {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [registered, setRegistered] = useState(true);
+  const [wrongCred, setWrongCred] = useState(false);
 
   const handlelogin  = e => {
       e.preventDefault();
       console.log("login");
-      AuthService.authenticate(email, password);
+      AuthService.authenticate(email, password).then(res => {
+        console.log(res);
+      }).catch(error => {
+        console.log(error)
+      });
   };
 
   const handleRegistration  = e => {
@@ -219,6 +224,7 @@ if(registered === false){
               onChange={onEmailChange}
             />
             <TextField
+              error={wrongCred}
               variant="outlined"
               margin="normal"
               required

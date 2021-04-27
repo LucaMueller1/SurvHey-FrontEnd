@@ -139,7 +139,6 @@ export function CheckBoxSurvey(props){
               </FormControl>
               <br></br>
               <Button variant="contained" color="primary" type="submit">Send Answer</Button>
-              <Button variant="contained" onClick={getResults}>Analyse Survey</Button>
           </form>
         );
       }

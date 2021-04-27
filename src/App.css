@@ -14,7 +14,7 @@ body{
   color: white;
   font-family: 'Manrope', sans-serif;
 }
-
+/*
  nav {
   display: flex;
   justify-content: space-around;
@@ -30,7 +30,7 @@ body{
   justify-content: space-around;
   align-items: center;
   list-style: none;
-}
+}*/
 
 input[type=text]{
   padding: 6px 10px;

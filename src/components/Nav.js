@@ -2,48 +2,74 @@ import React, {useState, useEffect} from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
 import { AuthInterceptor } from '../services/AuthInterceptor';
-import { requestService } from '../services/requestService'
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { useHistory } from "react-router";
+import { AuthService } from '../services/authService';
 
 
 export function Nav() {
+    const history = useHistory();
+
     const navStyle= {
         color: "white",
+        //width: "100%",
+        //height: "100px",
+        textDecoration: "none"
+    }
+
+    const navTitle = {
+        color: "white",
+        flexGrow: 1,
         textDecoration: "none"
     }
     
     const [user, setUser] = useState("");
 
-
     useEffect(() => {
         AuthInterceptor.intercept();
         // TODO requestService.getSurveys().then(res => {
         //   setUser(res.data[0][ 'user']);
-           
         // }
-            
         //     );
-        
     }, []);
 
-    
+    const logout = () => {
+        AuthInterceptor.intercept();
+        AuthService.logout();
+        history.replace("/login");
+    }
     
     return (
-        <nav style={navStyle}>
-            <Link style={navStyle} to="">
-            <h1 style={{fontSize: "24pt"}}>SurvHey</h1>
+        <div style={{flexGrow: 1}}>
+        <AppBar position="static" color="transparent" style={navStyle}>
+            <Toolbar>
+                <IconButton edge="start" onClick={() => {history.push("/")}}>
+                    <HomeIcon fontSize="large" style={{color: "white"}}/>
+                </IconButton>
+
+                <Link style={navTitle} to="">
+                    <Typography variant="h4">SurvHey</Typography>
                 </Link>
-            
-            {/* TODO <h3>{"Welcome " + user.firstName}</h3> */}
-            <ul className="navLinks">
-                <Link style={navStyle} to="">
-                    <li style={navStyle}>Home</li>
-                </Link>
-                <Link style={navStyle} to="/CreateSurvey">
-                  <li>CreateSurvey</li>
-                </Link>
+
+                <IconButton edge="end" onClick={logout}>
+                    <ExitToAppIcon fontSize="large" style={{color: "white"}}/>
+                </IconButton>
                 
-            </ul>
-        </nav>
+                {/* TODO <h3>{"Welcome " + user.firstName}</h3> */}
+                {/*<ul className="navLinks">
+                    <Link style={navStyle} to="">
+                        <li style={navStyle}>Home</li>
+                    </Link>
+                    <Link style={navStyle} to="/CreateSurvey">
+                    <li>CreateSurvey</li>
+                    </Link>
+                    
+                </ul>*/}
+            </Toolbar>
+        </AppBar>
+        </div>
     );
 }
 

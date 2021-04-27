@@ -12,6 +12,10 @@ export class requestService {
         return axios.post(environment.backEndUrl + "/user/login", jsonBody, {headers: {"Accept": "application/json"}})
     }
 
+    static async logoutUser() {
+        return axios.get(environment.backEndUrl + "/user/logout", {headers: {"Accept": "application/json"}})
+    }
+
     static async createUser(email, password, lastName, firstName) {
         let jsonBody = {
             "email": email,
