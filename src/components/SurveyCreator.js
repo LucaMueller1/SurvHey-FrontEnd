@@ -8,9 +8,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { SketchPicker } from 'react-color'
+import Card from '@material-ui/core/Card';
+
 
 
 
@@ -22,6 +25,19 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  paper: {
+    padding: theme.spacing(2),
+    //margin: 'auto',
+    //maxWidth: 180,
+    //maxHeight: 120,
+    height: '120px',
+    width: '180px',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
+    background: 'linear-gradient(45deg, #008a5e 30%, #3ac775 90%)',
+  },
 }));
 
 
@@ -29,14 +45,14 @@ class SurveyCreator extends React.Component {
   constructor() {
     super();
     this.state = {
-      surveyName: "Enter your Surveys name",
-      questionText: "Enter your Question",
+      surveyName: "",
+      questionText: "",
       surveyTyp: ["radio","checkbox"],
       selectedSurveyType: "radio",
       phase: 0,
       answerOptions: [],
       selectedOption: "",
-      background: '#fff'
+      background: '#fff',
      
     };
     this.formSubmit = this.formSubmit.bind(this);
@@ -55,7 +71,7 @@ class SurveyCreator extends React.Component {
     AuthInterceptor.intercept();
 
     requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.selectedSurveyType,this.state.answerOptions).then(res => {
-      alert("Survey was Submited sucessfull");
+      alert("Your survey was submited sucessfully.");
       this.props.history.push('');      //document.location.href = "/";
     }).catch(error => {
       console.log(error);
@@ -124,84 +140,135 @@ class SurveyCreator extends React.Component {
 
 //SequenzDiagramm --> Verschiedene Phasen
   render() {
+    const { classes } = this.props;
+
     if(this.state.phase === 0){
-      return(
-      <div>
-        <h3>Create your own Survey!</h3>
-        <Button variant="contained" onClick={this.switchPhase}>Create!</Button>
-      </div>
-      )
-    }
-
-
-    if(this.state.phase === 1){
       return (
         <div>
-          <input style={{width: "20%"}} type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
-          <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
-          <h3>Select a color theme:</h3>
-          <div style={{display: "inline-block"}}>
-          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
-          </div>
-          <h3>Color is {this.state.background}</h3>
+          <Card className={classes.paper}><h3>1/5</h3></Card>
+          <h2>Survey Name:</h2>
+          <Card className={classes.inputField}>
+          <TextField  variant="outlined" value={this.state.surveyName} onChange={this.onChangeSurveyName}></TextField>
+          </Card>
+          <div style={{marginTop:"2%"}}>
+        <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
+        </div>
         </div>
       );
     }
 
-    else if(this.state.phase === 2) {
+    else if(this.state.phase === 1){
       return (
-      <div>
-        <Button variant="contained" onClick={this.goBack}>go back</Button>
-        <h3>{this.state.surveyName}</h3>
-        <input style={{width: "20%"}} type="text" value={this.state.questionText} onChange={this.onChangeQuestionText}></input>
-        <br></br>
-        <label for="optionSelect">Choose answer option type</label>
-        <select id="optionSelect" onChange={this.onSurveyTypeChange}> 
-          <option value={"radio"}>Radio</option>
-          <option value={"check"}>Checkbox</option>
-        </select>
-      
-        <br></br>
+        <div>
+          <Card className={classes.paper}><h3>2/5</h3></Card>
+          <h2>Background Color:</h2>
+          <div style={{display: "inline-block"}}>
+          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          </div>
+          <h3>Color is {this.state.background}</h3>
+          <div style={{marginTop:"2%"}}>
+        <Button color="primary" onClick={this.goBack}>go back</Button>
+        <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
+        </div>
+        </div>
+      );
+    }
 
-        <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
-      </div>
-     
-    );}
+    else if(this.state.phase === 2){
+      return (
+        <div>
+          <Card className={classes.paper}><h3>3/5</h3></Card>
+          <h2>Accent Color:</h2>
+          <div style={{display: "inline-block"}}>
+          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          </div>
+          <h3>Color is {this.state.background}</h3>
+          <div style={{marginTop:"2%"}}>
+        <Button color="primary" onClick={this.goBack}>go back</Button>
+        <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
+        </div>
+        </div>
+      );
+    }
 
     else if(this.state.phase === 3) {
       return (
       <div>
-        <Button variant="contained" onClick={this.goBack}>go back</Button>
-        <h3>{this.state.surveyName}</h3>
-        <h3>{this.state.questionText}</h3>
-        <label>Enter an answer Option</label>
-        <input id="option-input" style={{width: "20%"}} type="text" onChange={this.saveInput}></input>
-        <Button
+        <Card className={classes.paper}><h3>4/5</h3></Card>
+        <h2>Survey Question:</h2>
+        <Card className={classes.inputField}>
+          <TextField  variant="outlined" value={this.state.questionText} onChange={this.onChangeQuestionText}></TextField>
+        </Card>
+        <h2>Survey Type:</h2>
+        <Card className={classes.inputField}>
+        <Select
+          label = "Survey Type"
+          id="optionSelect"
+          value={this.selectedSurveyType}
+          onChange={this.onSurveyTypeChange}
+          defaultValue={"radio"}
+        >
+          <MenuItem value={"radio"}>Radio</MenuItem>
+          <MenuItem value={"check"}>Checkbox</MenuItem>
+        </Select>
+        <div>{this.selectedSurveyType}</div>
+        </Card>
+  
+        <div style={{marginTop:"2%"}}>
+        <Button color="primary" onClick={this.goBack}>go back</Button>
+        <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
+        </div>
+      </div>
+     
+    );}
+
+    else if(this.state.phase === 4) {
+      return (
+      <div>
+        <Card className={classes.paper}><h3>5/5</h3></Card>
+        <h2>Answer Options:</h2>
+        <Card className={classes.inputField}>
+          <TextField id="option-input" variant="outlined" onChange={this.saveInput}></TextField>
+          <Button
           variant="contained"
           color="primary"
           startIcon={<Icon>add_circle</Icon>}
           onClick={this.onClickInputButton}
         >
-          Add answer
+          Add Option
       </Button>
+        </Card>
+        
         <br></br>
-        <label>Your answers:</label>
+        <h3>Your Options:</h3>
           {this.state.answerOptions.map((subItems, sIndex) => {
             return <div key={sIndex}> {subItems} </div>
           })}
-        <Button variant="contained" onClick={this.switchPhase}>Show Survey</Button>
+       <div style={{marginTop:"2%"}}>
+        <Button color="primary" onClick={this.goBack}>go back</Button>
+        <Button variant="contained" color="primary" onClick={this.switchPhase}>Show SurvHey</Button>
+        </div>
         </div>
      
     );}
 
     //Liste mit dem JSX Element als Inhalt
-    else if(this.state.phase === 4){
+    else if(this.state.phase === 5){
       return (
         <form>
-          <Button variant="contained" onClick={this.goBack}>go back</Button>
-          <h3>Title: {this.state.surveyName}</h3>
-          <h3>Question: {this.state.questionText}</h3>
-          <h3>AnswerOptions:</h3>
+          <Card className={classes.paper}><h3>Survey Preview</h3></Card>
+
+          <h2>Survey Title:</h2>
+          <Card className={classes.surveyPreview}><h3>{this.state.surveyName}</h3></Card>
+          
+          <h2>Survey Question:</h2>
+          <Card className={classes.surveyPreview}><h3>{this.state.questionText}</h3></Card>
+          
+          <h2>Survey Type:</h2>
+          <Card className={classes.surveyPreview}><h3>{this.state.selectedSurveyType}</h3></Card>
+          
+          <h2>Answer Options:</h2>
+          <Card className={classes.surveyPreview}>
           {this.state.answerOptions.map((opt, index) => {
             return (
               <div>
@@ -209,7 +276,11 @@ class SurveyCreator extends React.Component {
               </div>
             )
           })}
-          <Button variant="contained" color="primary" type="submit" onClick={this.formSubmit}>Submit Survey</Button>
+          </Card>
+          <div style={{marginTop:"2%"}}>
+        <Button color="primary" onClick={this.goBack}>go back</Button>
+        <Button variant="contained" color="primary" type="submit" onClick={this.formSubmit}>Submit Survey</Button>
+        </div>
         </form>
       );
     }
