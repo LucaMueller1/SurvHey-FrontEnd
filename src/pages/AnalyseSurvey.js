@@ -21,9 +21,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '1em',
       marginBottom: '1em',
       maxWidth: '66%',
-      //maxHeight: 120,
-      //height: '120px',
-      //width: '180px',
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -52,25 +49,24 @@ const useStyles = makeStyles((theme) => ({
 
      return (
          <div className={classes.root}>
-             <h1>{survey.questionText}</h1>
+             <h1>Insights on "{survey.questionText}"</h1>
              <Grid spacing={12} direction="column">
                  <Grid item xs={12}>
-                 <h3>Result Distribution</h3>
-                    <Paper className={classes.paper}>
+                 <h2>Distribution of Choices</h2>
+                    <Paper className={classes.paper} style={{display: "block"}}>
                         <SliderBar/>
+                        </Paper>
+                        <h2>Absolute Numbers</h2>
+                        <Paper className={classes.paper} style={{display: "block"}}>
+
+                        <ResultTable classPaper={classes.paper}/>
                     </Paper>
                  </Grid>
                  <Grid item>
-                 <h3>Geolocation Insights</h3>
+                 <h2>Geolocation Insights</h2>
                     <Paper className={classes.paper} m={300}>
                         <MapChart setTooltipContent={setContent}/>
                         <ReactTooltip>{content}</ReactTooltip>
-                    </Paper>
-                 </Grid>
-                 <Grid item>
-                 <h3>Absolute Numbers</h3>
-                    <Paper className={classes.paper} m={300}>
-                        <ResultTable classPaper={classes.paper}/>
                     </Paper>
                  </Grid>
              </Grid>

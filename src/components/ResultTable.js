@@ -46,16 +46,16 @@ export default function ResultTable() {
             <TableHead>
               <TableRow>
                 <TableCell><h3>Option</h3></TableCell>
-                <TableCell align="right"><h3>Quantity</h3></TableCell>
+                <TableCell align="right"><h3>Number of Submissions</h3></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody >
               {data.map((entry) => (
                 <TableRow key={entry[0]}>
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" style={{fontWeight: "bold"}}>
                     {entry[0]}
                   </TableCell>
-                  <TableCell align="right">{entry[1]}</TableCell>
+                  <TableCell align="right" style={{fontWeight: "bold"}}>{entry[1]}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
