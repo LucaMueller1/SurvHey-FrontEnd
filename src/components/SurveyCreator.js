@@ -112,6 +112,14 @@ class SurveyCreator extends React.Component {
   handleChangeComplete = (color) => {
     this.setState({ background: color.hex });
   };
+
+  cancelOptionInput = () => { 
+    document.getElementById("option-input").value = "";
+  }
+  onClickInputButton = (event) => {
+    this.addNewItem();
+    this.cancelOptionInput();
+  }
 //axios library --> eigene JS Methode
 
 //SequenzDiagramm --> Verschiedene Phasen
@@ -167,12 +175,12 @@ class SurveyCreator extends React.Component {
         <h3>{this.state.surveyName}</h3>
         <h3>{this.state.questionText}</h3>
         <label>Enter an answer Option</label>
-        <input style={{width: "20%"}} type="text" onChange={this.saveInput}></input>
+        <input id="option-input" style={{width: "20%"}} type="text" onChange={this.saveInput}></input>
         <Button
           variant="contained"
           color="primary"
           startIcon={<Icon>add_circle</Icon>}
-          onClick={this.addNewItem}
+          onClick={this.onClickInputButton}
         >
           Add answer
       </Button>
