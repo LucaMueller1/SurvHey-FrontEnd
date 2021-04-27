@@ -132,7 +132,9 @@ class SurveyCreator extends React.Component {
           <input style={{width: "20%"}} type="text" value={this.state.surveyName} onChange={this.onChangeSurveyName}></input>
           <Button variant="contained" onClick={this.switchPhase}>Continue</Button>
           <h3>Select a color theme:</h3>
-          <SketchPicker color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          <div style={{display: "inline-block"}}>
+          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          </div>
           <h3>Color is {this.state.background}</h3>
         </div>
       );
