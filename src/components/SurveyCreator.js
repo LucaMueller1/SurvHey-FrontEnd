@@ -41,6 +41,7 @@ class SurveyCreator extends React.Component {
     };
     this.formSubmit = this.formSubmit.bind(this);
     this.onChangeSurveyName = this.onChangeSurveyName.bind(this);
+    this.goBack = this.goBack.bind(this);
     this.switchPhase = this.switchPhase.bind(this);
     this.onChangeQuestionText = this.onChangeQuestionText.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
@@ -78,6 +79,12 @@ class SurveyCreator extends React.Component {
   switchPhase(event) {
     this.setState({
       phase: event.target.value = this.state.phase + 1
+    });
+  }
+
+  goBack(event) {
+    this.setState({
+      phase: event.target.value = this.state.phase - 1
     });
   }
 
@@ -134,6 +141,7 @@ class SurveyCreator extends React.Component {
     else if(this.state.phase === 2) {
       return (
       <div>
+        <Button variant="contained" onClick={this.goBack}>go back</Button>
         <h3>{this.state.surveyName}</h3>
         <input style={{width: "20%"}} type="text" value={this.state.questionText} onChange={this.onChangeQuestionText}></input>
         <br></br>
@@ -153,6 +161,7 @@ class SurveyCreator extends React.Component {
     else if(this.state.phase === 3) {
       return (
       <div>
+        <Button variant="contained" onClick={this.goBack}>go back</Button>
         <h3>{this.state.surveyName}</h3>
         <h3>{this.state.questionText}</h3>
         <label>Enter an answer Option</label>
@@ -179,6 +188,7 @@ class SurveyCreator extends React.Component {
     else if(this.state.phase === 4){
       return (
         <form>
+          <Button variant="contained" onClick={this.goBack}>go back</Button>
           <h3>Title: {this.state.surveyName}</h3>
           <h3>Question: {this.state.questionText}</h3>
           <h3>AnswerOptions:</h3>
