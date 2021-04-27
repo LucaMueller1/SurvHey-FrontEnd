@@ -31,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
       },
       "&:hover .buttonMenu": {
         display: "block"
-      },
-      "&:hover": {
-        borderStyle: "solid",
-        borderColor: "green"
       }
     },
     questionText: {
