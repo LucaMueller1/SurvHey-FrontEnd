@@ -54,6 +54,7 @@ class SurveyCreator extends React.Component {
       answerOptions: [],
       selectedOption: "",
       background: '#fff',
+      optionText: ""
      
     };
     this.formSubmit = this.formSubmit.bind(this);
@@ -63,6 +64,7 @@ class SurveyCreator extends React.Component {
     this.onChangeQuestionText = this.onChangeQuestionText.bind(this);
     this.onValueChange = this.onValueChange.bind(this);
     this.onSurveyTypeChange = this.onSurveyTypeChange.bind(this);
+    this.onChangeOption = this.onChangeOption.bind(this);
   }
   
   
@@ -116,6 +118,13 @@ class SurveyCreator extends React.Component {
     })
   }
 
+  onChangeOption(event) {
+    this.setState({
+      optionText: event.target.value
+    })
+    this.saveInput(event);
+  }
+
   saveInput = (e) => {
     this.setState({ input: e.target.value });
   };
@@ -131,7 +140,9 @@ class SurveyCreator extends React.Component {
   };
 
   cancelOptionInput = () => { 
-    document.getElementById("option-input").value = "";
+    this.setState({
+      optionText: ""
+    })
   }
   onClickInputButton = (event) => {
     this.addNewItem();
@@ -234,7 +245,7 @@ class SurveyCreator extends React.Component {
         <Card className={classes.paper}><h3>5/5</h3></Card>
         <Card className={classes.inputField}>
         <h2>Answer Options:</h2>
-          <TextField InputProps={{style: {color: "white"}}} id="option-input" defaultValue="" variant="outlined" onChange={this.saveInput}></TextField>
+          <TextField InputProps={{style: {color: "white"}}} id="option-input" value={this.state.optionText} variant="outlined" onChange={this.onChangeOption}></TextField>
           <Button
           variant="contained"
           color="primary"
