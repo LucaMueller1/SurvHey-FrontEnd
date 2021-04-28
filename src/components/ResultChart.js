@@ -1,45 +1,61 @@
 import React, {useState, useEffect} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {AuthInterceptor} from '../services/AuthInterceptor';
 import {requestService} from '../services/requestService';
-import Chart from 'react-google-charts';
+import {Chart, PieSeries, Title, Tooltip} from '@devexpress/dx-react-chart-material-ui';
+import { EventTracker, Animation } from '@devexpress/dx-react-chart';
 
+const useStyles = makeStyles((theme) => ({
+    chartConainter: {
+      display: "flex",
+      justifyContent: "center"
+    }
+}));
 
-  
 
 export function ResultsChart(props) {
+    const classes = useStyles();
 
     const [results, setResults] = useState([]);
     const [id, setId] = useState(props.id)
 
+    const ToolTipContent = ({ text, targetItem, ...restProps }) => {
+        const displayText = results[targetItem.point].option + ": " + results[targetItem.point].value;
+        return (
+          <Tooltip.Content
+            {...restProps}
+            text={displayText}
+            targetItem={targetItem}
+          />
+        );
+    };
+
+    const toDataArray = (dataArray) => {
+        let arr = [];
+        for(const [key, value] of Object.entries(dataArray)) {
+            arr.push({value: value, option: key});
+        }
+        return arr;
+    }
+
     useEffect(() => {
         AuthInterceptor.intercept();
         requestService.getResults(id).then(res => {
-            setResults(res.data.choices);
+            setResults(toDataArray(res.data.choices));
         }
             
             );   
     }, []);
-
-    let arr = [['AnswerOption', 'Submitted Answers'], ]
-    for(const [key, value] of Object.entries(results)) {
-        arr.push([key, value]);
-      }
-    console.log(arr);
       
     return (
-        <div className="pieChartContainer" >
-            <Chart
-                className="resultPieChart"
-                width={'500px'}
-                height={'300px'}
-                chartType="PieChart"
-                loader={<div>Loading Results...</div>}
-                data={arr}
-                options={{
-                    title: 'Survey Results:',
-                }}
-                rootProps={{ 'data-testid': '1' }}
-            />
+        <div className={classes.chartConainter} >
+            <Chart data={results} width={250} height={250}>
+                <PieSeries valueField="value" argumentField="option" innerRadius={0.4} />
+                <Title text="Results"/>
+                <EventTracker/>
+                <Tooltip contentComponent={ToolTipContent}/>
+                <Animation/>
+            </Chart>
         </div>
     );
 }

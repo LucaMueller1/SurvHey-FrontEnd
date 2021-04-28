@@ -79,7 +79,7 @@ input[type=text]{
  img .HomeLogo {
   size: 50% 50%;
 }
-
+/*
 .resultPieChart {
   display: inline-block;
   margin-top: 20px;
@@ -92,7 +92,7 @@ input[type=text]{
 .pieChartContainer {
   margin: auto;
 }
-
+*/
 
 
 /**.Logo {

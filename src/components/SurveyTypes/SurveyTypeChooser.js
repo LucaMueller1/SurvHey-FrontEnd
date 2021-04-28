@@ -13,6 +13,7 @@ export function SurveyTypeChooser(props) {
 
   useEffect(() => {
     setSurveytype(props.surveyType);
+    setShowResults(props.showResults);
     console.log(props.surveyType);
   }, [props]);
   

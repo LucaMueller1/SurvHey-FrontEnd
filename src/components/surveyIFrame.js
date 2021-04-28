@@ -5,7 +5,7 @@ import RadioSurvey from './SurveyTypes/RadioSurvey';
 import { SurveyTypeChooser } from "./SurveyTypes/SurveyTypeChooser";
 import  PopUp  from './PopUp';
 import Button from '@material-ui/core/Button';
-import HelpIcon from '@material-ui/icons/Help';
+import PieChartIcon from '@material-ui/icons/PieChart';
 
 
 // Survey true/false = null abfragen dann Logik implementieren
@@ -16,7 +16,7 @@ export function SurveyIFrame() {
     const [survey, setSurvey] = useState({});
     const [seen, setSeen] = useState(false);
 
-    const [buttonPopUp, setButtonPopUp] = useState(false);
+    const [showResults, setShowResults] = useState(false);
     
 
     useEffect(() => {
@@ -39,14 +39,10 @@ export function SurveyIFrame() {
     } else {
         return (
             <div>
-                <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions}/>
+                <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions} showResults={showResults}/>
                 <br></br>
                 <div>
-                    <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Privacy
-                    </Button>
-                    <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
-                        <p id="popup-text">A data processing agreement (DPA) between you and the website owner mentioning SurvHey as sub-contractor is necessary. A DPA between you and SurvHey is necessary as well. The website owner is responsible for consent banners. For further information see GDPR, especially Art.28 </p>
-                    </PopUp>
+                    <Button onClick={() => setShowResults(!showResults)} variant="contained" color="default" endIcon={<PieChartIcon/>}>Results</Button>
                 </div>
             </div>
         
