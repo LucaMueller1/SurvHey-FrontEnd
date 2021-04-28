@@ -43,11 +43,16 @@ export function ResultsChart(props) {
         AuthInterceptor.intercept();
         requestService.getResults(id).then(res => {
             setResults(toDataArray(res.data.choices));
-            setLoaded(true);
         }
             
             );   
     }, []);
+
+    useEffect(() => {
+        if(results.length > 0) {
+            setLoaded(true);
+        }
+    }, [results])
       
     return (
         <div>

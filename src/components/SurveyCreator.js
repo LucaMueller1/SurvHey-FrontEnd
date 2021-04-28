@@ -53,7 +53,8 @@ class SurveyCreator extends React.Component {
       phase: 0,
       answerOptions: [],
       selectedOption: "",
-      background: '#fff',
+      backgroundColor: '#fff',
+      accentColor: '#fff',
       optionText: ""
      
     };
@@ -73,7 +74,7 @@ class SurveyCreator extends React.Component {
     event.preventDefault();
     AuthInterceptor.intercept();
 
-    requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.selectedSurveyType,this.state.answerOptions).then(res => {
+    requestService.postSurvey(this.state.surveyName,this.state.questionText,this.state.selectedSurveyType,this.state.answerOptions, this.state.backgroundColor, this.state.accentColor).then(res => {
       alert("Your survey was submited sucessfully.");
       this.props.history.push('');      //document.location.href = "/";
     }).catch(error => {
@@ -135,8 +136,12 @@ class SurveyCreator extends React.Component {
     this.setState({answerOptions: answerOptions})
   };
 
-  handleChangeComplete = (color) => {
-    this.setState({ background: color.hex });
+  handleBackgroundColor = (color) => {
+    this.setState({ backgroundColor: color.hex });
+  };
+
+  handleAccentColor = (color) => {
+    this.setState({ accentColor: color.hex });
   };
 
   cancelOptionInput = () => { 
@@ -178,9 +183,9 @@ class SurveyCreator extends React.Component {
           <Card className={classes.inputField}>
           <h2>Background Color:</h2>
           <div style={{display: "inline-block"}}>
-          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          <SketchPicker   color={ this.state.backgroundColor } onChangeComplete={ this.handleBackgroundColor}/>
           </div>
-          <h3>Color is {this.state.background}</h3>
+          <h3>Color is {this.state.backgroundColor}</h3>
           <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
@@ -197,9 +202,9 @@ class SurveyCreator extends React.Component {
           <Card className={classes.inputField}>
           <h2>Accent Color:</h2>
           <div style={{display: "inline-block"}}>
-          <SketchPicker   color={ this.state.background } onChangeComplete={ this.handleChangeComplete }/>
+          <SketchPicker   color={ this.state.accentColor } onChangeComplete={ this.handleAccentColor }/>
           </div>
-          <h3>Color is {this.state.background}</h3>
+          <h3>Color is {this.state.accentColor}</h3>
           <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>

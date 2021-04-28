@@ -70,7 +70,7 @@ function RadioSurvey(props) {
               </FormControl>
               
               <br></br>
-              <Button variant="contained" color="primary" type="submit">Send Answer</Button>
+              <Button id="submitButton" variant="contained" color="primary" type="submit">Send Answer</Button>
           </form>
         );
       }

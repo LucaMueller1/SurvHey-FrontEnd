@@ -26,12 +26,14 @@ export class requestService {
         return axios.post(environment.backEndUrl + "/user", jsonBody, {headers: {"Accept": "application/json"}})
     }
 
-    static async postSurvey(surveyName, questionText, surveyTyp, answerOptions){
+    static async postSurvey(surveyName, questionText, surveyTyp, answerOptions, backgroundColor, accentColor){
         let answers = this.toAnswerOptionJson(answerOptions);
         let jsonBody = {
             "name": surveyName,
             "questionText": questionText,
             "mode": surveyTyp,
+            "backgroundColor": backgroundColor,
+            "accentColor": accentColor,
             "answerOptions": answers
         };
         return axios.post(environment.backEndUrl + "/survey",jsonBody,{headers: {"Accept": "application/json"}});
