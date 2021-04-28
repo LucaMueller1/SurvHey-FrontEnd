@@ -17,6 +17,7 @@ export function ResultsChart(props) {
     const classes = useStyles();
 
     const [results, setResults] = useState([]);
+    const [loaded, setLoaded] = useState(false);
     const [id, setId] = useState(props.id)
 
     const ToolTipContent = ({ text, targetItem, ...restProps }) => {
@@ -42,20 +43,23 @@ export function ResultsChart(props) {
         AuthInterceptor.intercept();
         requestService.getResults(id).then(res => {
             setResults(toDataArray(res.data.choices));
+            setLoaded(true);
         }
             
             );   
     }, []);
       
     return (
-        <div className={classes.chartConainter} >
-            <Chart data={results} width={250} height={250}>
-                <PieSeries valueField="value" argumentField="option" innerRadius={0.4} />
-                <Title text="Results"/>
-                <EventTracker/>
-                <Tooltip contentComponent={ToolTipContent}/>
-                <Animation/>
-            </Chart>
+        <div>
+            {loaded && <div className={classes.chartConainter} >
+                <Chart data={results} width={250} height={250}>
+                    <PieSeries valueField="value" argumentField="option" innerRadius={0.4} />
+                    <Title text="Results"/>
+                    <EventTracker/>
+                    <Tooltip contentComponent={ToolTipContent}/>
+                    <Animation/>
+                </Chart>
+            </div>}
         </div>
     );
 }

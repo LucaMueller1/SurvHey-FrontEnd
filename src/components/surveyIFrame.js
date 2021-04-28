@@ -24,7 +24,7 @@ export function SurveyIFrame() {
         requestService.getSurveyById(id).then(res => {
             console.log(res.data);
             setSurvey(res.data);
-            //document.body.style = 'background: ' + (res.data.backgroundColor == null ? "#282c34" : res.data.backgroundColor);
+            document.body.style = 'background: ' + (res.data.backgroundColor == null ? "#121212" : res.data.backgroundColor);
         }).catch(err => {
             console.log(err);
             setSurvey(null);
