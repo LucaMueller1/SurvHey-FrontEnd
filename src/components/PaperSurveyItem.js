@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '180px',
       maxHeight: '120px',
       height: '120px',
-      //width: '180px',
+      width: '180px',
       alignItems: "center",
       justify: "center",
       "& .buttonMenu": {

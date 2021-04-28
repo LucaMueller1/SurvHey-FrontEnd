@@ -26,27 +26,7 @@ export function CheckBoxSurvey(props){
       setSelectedIDs(ids);
     }, []);
 
-    useEffect(() => {
-      AuthInterceptor.intercept();
-      requestService.getResults(id).then(res => {
-          setResults(Object.entries(res.data.choices));
-          console.log(res);
-      }
-          
-          );
-      getResultSum();
-      console.log(results)
-      
-  }, []);
     
-  const getResultSum =async () => {
-    await requestService.getAnalysis(id).then(res => {
-        setResultSum(res.data.amount);
-        console.log(res.data.amount);
-    }).catch( error => {
-        console.log(error);
-    });
- }
 
     const openSurvey= e => {
       setToggle(true);
@@ -57,14 +37,8 @@ export function CheckBoxSurvey(props){
       console.log(selectedIDs);
     }
   
-    const getResults = e => {
-      //document.location.href="/AnalyseSurvey/" + props.id;
-      history.push("/AnalyseSurvey/" + props.id);
-    }
-  
   
    const formSubmit = event => {
-      alert("answer submitted");
       event.preventDefault();
       // requestService.postSubmisson(this.props.id, this.state.selectedAnswerId);
   
@@ -78,9 +52,12 @@ export function CheckBoxSurvey(props){
       }
       console.log(arr);
       
-      requestService.postSubmisson(id, toAnswerOptionIDs(arr));
-      props.showResultChart();
-      console.log("submisson posted");
+      requestService.postSubmisson(id, toAnswerOptionIDs(arr)).then(res => {
+        props.showResultChart();
+        console.log("submisson posted");
+      }).catch(error => {
+        console.log(error);
+      });
       
     }
 
@@ -90,7 +67,7 @@ export function CheckBoxSurvey(props){
           rList.push({"id": element});
       });
       return rList;
-  }
+    }
 
     const handleChange = (event) => {
       setSelectedIDs({ ...selectedIDs, [event.target.value]: event.target.checked });

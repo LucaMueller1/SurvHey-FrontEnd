@@ -13,11 +13,18 @@ import Logo from '../media/SurvHeyLogo.png';
 export function Nav() {
     const history = useHistory();
 
-    const navStyle= {
+    const navStyle = {
         color: "white",
         //width: "100%",
         //height: "100px",
         textDecoration: "none"
+    }
+
+    const logoStyle = {
+        position: "absolute",
+        top: "0px",
+        marginTop: "-8px",
+        height: "80px"
     }
 
     const navTitle = {
@@ -39,7 +46,8 @@ export function Nav() {
     const logout = () => {
         AuthInterceptor.intercept();
         AuthService.logout();
-        history.replace("/login");
+        //history.replace("/login"); --> issues with wrong password state
+        document.location.href = "/login";
     }
     
     return (
@@ -52,7 +60,7 @@ export function Nav() {
 
                 <Link style={navTitle} to="">
                     
-                    <Typography variant="h4">SurvHey<img src={Logo} style={{width: "100px"}, {height: "100px"}} align="middle" alt="SurvHeyLogo"/></Typography>
+                    <Typography variant="h4">SurvHey<img src={Logo} style={logoStyle} align="middle" alt="SurvHeyLogo"/></Typography>
                     
                 </Link>
 

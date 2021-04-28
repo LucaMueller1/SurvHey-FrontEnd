@@ -21,7 +21,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit">
         SurvHey
       </Link>{' '}
       {new Date().getFullYear()}
@@ -99,6 +99,7 @@ export default function SignInSide() {
     }).catch(error => {
       console.log(error);
       console.log("Error while creating user");
+      setWrongCred(true);
     });
 };
 
@@ -118,9 +119,11 @@ export default function SignInSide() {
  
   const onRegister = e => {
       setRegistered(false);
+      setWrongCred(false);
   }
   const onBacktoLogin= e => {
     setRegistered(true);
+    setWrongCred(false);
 }
 
 if(registered === false){
@@ -138,6 +141,7 @@ if(registered === false){
             </Typography>
             <form className={classes.form} noValidate onSubmit={handleRegistration}>
               <TextField
+                error={wrongCred}
                 variant="outlined"
                 margin="normal"
                 required
