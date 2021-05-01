@@ -39,19 +39,19 @@ const useStyles = makeStyles((theme) => ({
     },
     hoverEdit: {
         borderRadius: '4px',
-        width: '25%'
+        width: '33.33%'
     },
     hoverView: {
         borderRadius: '0px',
-        width: '25%'
+        width: '33.33%'
     },
     hoverExport: {
         borderRadius: '4px',
-        width: '25%'
+        width: '33.33%'
     },
     hoverDelete: {
         borderRadius: '4px',
-        width: '25%',
+        width: '33.33%',
         "&:hover .deleteButton": {
             color: "red"
           }
@@ -104,9 +104,6 @@ function PaperSurveyItem(props) {
                 <Grid item xs={12}>
                     <Fade in={wrap}>
                     <ButtonGroup fullWidth className={"buttonMenu"} variant="contained" size="small" aria-label="small outlined button group">
-                        <IconButton onClick={clickEdit} className={classes.hoverEdit} aria-label="edit">
-                            <EditIcon></EditIcon>
-                        </IconButton>
                         <IconButton onClick={clickView} className={classes.hoverView} aria-label="view">
                             <PollIcon></PollIcon>
                         </IconButton>
