@@ -25,7 +25,6 @@ export function SurveyIFrame() {
             console.log(res.data);
             setSurvey(res.data);
             document.body.style = 'background: ' + (res.data.backgroundColor == null ? "#121212" : res.data.backgroundColor);
-            //document.getElementById('submitButton').style.color = res.data.accentColor;
         }).catch(err => {
             console.log(err);
             setSurvey(null);
@@ -39,11 +38,11 @@ export function SurveyIFrame() {
         )
     } else {
         return (
-            <div>
-                <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions} showResults={showResults}/>
+            <div style={{overflow:"clip"}}>
+                <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions} showResults={showResults} accentColor={survey.accentColor}/>
                 <br></br>
-                <div>
-                    <Button onClick={() => setShowResults(!showResults)} variant="contained" color="default" endIcon={<PieChartIcon/>}>Results</Button>
+                <div style={{marginTop: "5%"}}>
+                    <Button onClick={() => setShowResults(!showResults)} variant="outlined" color="primary" endIcon={<PieChartIcon/>}>Results</Button>
                 </div>
             </div>
         
