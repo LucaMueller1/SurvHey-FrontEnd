@@ -17,7 +17,9 @@ export function Nav() {
         color: "white",
         //width: "100%",
         //height: "100px",
-        textDecoration: "none"
+        textDecoration: "none",
+        marginBottom: "2em",
+        padding: "1%"
     }
 
     const logoStyle = {
@@ -30,7 +32,7 @@ export function Nav() {
     const navTitle = {
         color: "white",
         flexGrow: 1,
-        textDecoration: "none"
+        textDecoration: "none",
     }
     
     const [user, setUser] = useState("");

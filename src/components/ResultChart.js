@@ -7,6 +7,7 @@ import { EventTracker, Animation } from '@devexpress/dx-react-chart';
 
 const useStyles = makeStyles((theme) => ({
     chartConainter: {
+      marginTop: "5%",
       display: "flex",
       justifyContent: "center"
     }
