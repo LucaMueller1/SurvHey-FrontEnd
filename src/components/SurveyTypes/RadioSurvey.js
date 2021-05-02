@@ -31,7 +31,6 @@ function RadioSurvey(props) {
   const history = useHistory();
 
   console.log(props.accentColor)
-  document.body.style = "overflow: clip; "
 
   const theme = createMuiTheme({
     palette: {

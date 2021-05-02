@@ -38,7 +38,7 @@ export function SurveyIFrame() {
         )
     } else {
         return (
-            <div style={{overflow:"clip"}}>
+            <div style={{overflowX:"-moz-hidden-unscrollable"}}>
                 <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions} showResults={showResults} accentColor={survey.accentColor}/>
                 <br></br>
                 <div style={{marginTop: "5%"}}>
