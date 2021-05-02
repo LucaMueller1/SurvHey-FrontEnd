@@ -40,7 +40,7 @@ function RadioSurvey(props) {
       secondary: {
         main: props.accentColor !== null ? props.accentColor: "#ffff",
       },
-    },
+    }
   });
   
   const openSurvey= e => {
@@ -78,7 +78,9 @@ function RadioSurvey(props) {
   const answers = props.answerOptions.map((answer, index) => {
     return (
 
-      <FormControlLabel key={answer.id} value={answer.id} control={<Radio />} label={answer.content} />
+      <FormControlLabel key={answer.id} value={answer.id} control={<Radio style ={{
+        color: props.accentColor,
+      }}/>} label={answer.content} />
 
     );
     });
@@ -87,17 +89,16 @@ function RadioSurvey(props) {
         return(
           <ThemeProvider theme={theme}>
           <div>
-            <h2>{props.surveyName}</h2>
+            <h2>{props.questionText}</h2>
             <Button variant="outlined" color="primary" onClick={openSurvey}>participate</Button>
           </div>
           </ThemeProvider>
         );
       }
     else{ return(
-      <ThemeProvider theme={theme}>
-            <form onSubmit={formSubmit}>
-              <h3>{props.surveyName}</h3>
-              <h2>{props.questionText}</h2>
+      <ThemeProvider theme={theme} >
+            <form onSubmit={formSubmit} >
+              <h3>{props.questionText}</h3>
               
               <FormControl component="fieldset" style={{marginBottom: "5%"}}>
                 <RadioGroup color={"blue"} aria-label="SurveyQuestions" name="surveys" value={selectedAnswerId} onChange={onValueChange}>

@@ -15,7 +15,6 @@ export function SurveyTypeChooser(props) {
     setSurveytype(props.surveyType);
     setShowResults(props.showResults);
     console.log(props.surveyType);
-    document.body.style = "overflow: clip; "
   }, [props]);
   
   
@@ -23,7 +22,7 @@ export function SurveyTypeChooser(props) {
   if(surveyType === "RADIO"){
          return(
             <div>
-              <RadioSurvey style={{overflow:"clip"}} id={props.id} showResultChart={() => {setShowResults(true)}} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions} accentColor={props.accentColor}/>
+              <RadioSurvey id={props.id} showResultChart={() => {setShowResults(true)}} surveyName={props.surveyName} questionText={props.questionText} surveyType={props.surveyType} answerOptions={props.answerOptions} accentColor={props.accentColor}/>
               {showResults ? <ResultsChart id={props.id}/> : null }
             </div>
         );

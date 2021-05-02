@@ -7,7 +7,7 @@ import { EventTracker, Animation } from '@devexpress/dx-react-chart';
 
 const useStyles = makeStyles((theme) => ({
     chartConainter: {
-      marginTop: "5%",
+      //marginTop: "5%",
       display: "flex",
       justifyContent: "center"
     }
@@ -56,11 +56,10 @@ export function ResultsChart(props) {
     }, [results])
       
     return (
-        <div>
+        <div style={{marginTop: "5%"}}>
             {loaded && <div className={classes.chartConainter} >
-                <Chart data={results} width={250} height={250}>
+                <Chart data={results} width={"250"} height={"250"}>
                     <PieSeries valueField="value" argumentField="option" innerRadius={0.4} />
-                    <Title text="Results"/>
                     <EventTracker/>
                     <Tooltip contentComponent={ToolTipContent}/>
                     <Animation/>

@@ -6,6 +6,7 @@ import { SurveyTypeChooser } from "./SurveyTypes/SurveyTypeChooser";
 import  PopUp  from './PopUp';
 import Button from '@material-ui/core/Button';
 import PieChartIcon from '@material-ui/icons/PieChart';
+import { Typography } from "@material-ui/core";
 
 
 // Survey true/false = null abfragen dann Logik implementieren
@@ -38,12 +39,19 @@ export function SurveyIFrame() {
         )
     } else {
         return (
-            <div style={{overflowX:"-moz-hidden-unscrollable"}}>
+            <div>
+                <div style={{paddingTop: "2%"}}>
+                <Typography  variant="caption">powered by SurvHey</Typography>
+                </div>
                 <SurveyTypeChooser id={id} surveyName={survey.name} questionText={survey.questionText} surveyType={survey.mode} answerOptions={survey.answerOptions} showResults={showResults} accentColor={survey.accentColor}/>
                 <br></br>
-                <div style={{marginTop: "5%"}}>
-                    <Button onClick={() => setShowResults(!showResults)} variant="outlined" color="primary" endIcon={<PieChartIcon/>}>Results</Button>
+                <div style={{marginTop: "1%"}}>
+                    <Button onClick={() => setShowResults(!showResults)} variant="outlined" style ={{
+                      color: survey.accentColor,
+                      borderColor: survey.accentColor,
+                    }} endIcon={<PieChartIcon/>}>Results</Button>
                 </div>
+                
             </div>
         
         );

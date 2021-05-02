@@ -53,6 +53,7 @@ export function CheckBoxSurvey(props){
         ids[answer.id] = false;
       });
       setSelectedIDs(ids);
+
     }, []);
 
     
@@ -92,6 +93,8 @@ export function CheckBoxSurvey(props){
     }).catch(error => {
         console.log("Failed send submission");
         setOpen(true);
+        document.body.style.overflowX = "clip";
+
     });
     }
 
@@ -125,16 +128,19 @@ export function CheckBoxSurvey(props){
     const answers = props.answerOptions.map((answer, index) => {
       return (
         <ThemeProvider theme={theme}>
-        <FormControlLabel key={answer.id} value={answer.id} control={<Checkbox />} label={answer.content}/>
+        <FormControlLabel color="primary" key={answer.id} value={answer.id} control={<Checkbox style ={{
+                      color: props.accentColor,
+                    }}/>} label={answer.content}/>
         </ThemeProvider>
+   
       );
       });
 
       if(toggle === false){
         return(
           <ThemeProvider theme={theme}>
-          <div>
-            <h2>{props.surveyName}</h2>
+          <div style={{marginTop: "5%"}}>
+            <h2>{props.questionText}</h2>
             <Button variant="outlined" color="primary" onClick={openSurvey}>participate</Button>
           </div>
           </ThemeProvider>
@@ -143,17 +149,17 @@ export function CheckBoxSurvey(props){
     else{ return(
           <ThemeProvider theme={theme}>
             <div>
-            <form onSubmit={formSubmit}>
-              <h3>{props.surveyName}</h3>
-              <h4>{props.questionText}</h4>
+            <form onSubmit={formSubmit} >
+              {/* <h3>{props.surveyName}</h3> */}
+              <h3>{props.questionText}</h3>
               
-              <FormControl component="fieldset">
-                <FormGroup aria-label="SurveyQuestions" name="surveys" value={selectedIDs} onChange={handleChange}>
+              <FormControl color="primary" component="fieldset">
+                <FormGroup color="primary" aria-label="SurveyQuestions" name="surveys" value={selectedIDs} onChange={handleChange}>
                   {answers}
                 </FormGroup>
               </FormControl>
               <br></br>
-              <Button id="submitButton" variant="contained" color="primary" type="submit">Send Answer</Button>
+              <Button style={{marginTop: "2%"}} id="submitButton" variant="contained" color="primary" type="submit">Submit</Button>
           </form>
               <Backdrop className={classes.backdrop} open={open} onClick={() => {setOpen(false)}}>
               <Typography variant="h6">You can only participate once.</Typography>
