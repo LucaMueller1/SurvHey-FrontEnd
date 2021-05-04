@@ -6,7 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
 import Popover from '@material-ui/core/Popover';
+import PopUp  from '../components/PopUp';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Button from '@material-ui/core/Button';
+import HelpIcon from '@material-ui/icons/Help';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -59,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
     },
     popoverBox: {
         width: "180px",
+    },
+    privacyContainer: {
+        margin: theme.spacing(2)
     }
 }));
  
@@ -69,6 +75,7 @@ export function ExportSurvey() {
     //help popover
     const [anchorEl, setAnchorEl] = useState(null);
     const [popoverState, setPopoverState] = useState(0);
+    const [buttonPopUp, setButtonPopUp] = useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -98,6 +105,15 @@ export function ExportSurvey() {
                 <TextField className={classes.textfield} InputProps={{className: classes.inputTextfield}} InputLabelProps={{className: classes.textfieldLabel}} id="iframe-code-textfield" label="iFrame-Code" variant="standard" value={'<iframe height="300px" width="320px" title="survey" src="' + window.location.origin + "/Survey/" + id + '"/>'}/>
             </form>
             <iframe height="300px" width="320px" title="survey" src={"/Survey/" + id}/>
+
+            <div className={classes.privacyContainer}>
+                <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Privacy</Button>
+                <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
+                    <p id="popup-text">A data processing agreement (DPA) between you and the website owner mentioning SurvHey as sub-contractor is necessary. A DPA between you and SurvHey is necessary as well. The website owner is responsible for consent banners. For further information see GDPR, especially Art.28 </p>
+                </PopUp>
+            </div>
+
+
 
             <Fab onClick={handleClick} size="medium" color="secondary" aria-label="add" className={classes.fab}>
                 <Typography variant="h5">?</Typography>
