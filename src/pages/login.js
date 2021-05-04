@@ -83,9 +83,9 @@ export default function SignInSide() {
         }
     }).catch(error => {
       console.log("Error during authentication");
+      setWrongCred(true);
       if(error.response && error.response.status === 403) {
         console.log("Wrong username or password");
-        setWrongCred(true);
       }
     })
   };
