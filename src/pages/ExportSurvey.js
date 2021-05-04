@@ -5,14 +5,14 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Fab from '@material-ui/core/Fab';
-import Popover from '@material-ui/core/Popover';
-import PopUp  from '../components/PopUp';
+import Modal from '@material-ui/core/Modal';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import HelpIcon from '@material-ui/icons/Help';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { Popover } from '@material-ui/core';
 
 const helpPopoverData = [
     {
@@ -65,6 +65,17 @@ const useStyles = makeStyles((theme) => ({
     },
     privacyContainer: {
         margin: theme.spacing(2)
+    },
+    privacyPaper: {
+        position: 'absolute',
+        width: 600,
+        backgroundColor: "#121212",
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)"
     }
 }));
  
@@ -75,7 +86,7 @@ export function ExportSurvey() {
     //help popover
     const [anchorEl, setAnchorEl] = useState(null);
     const [popoverState, setPopoverState] = useState(0);
-    const [buttonPopUp, setButtonPopUp] = useState(false);
+    const [privacyModal, setPrivacyModal] = useState(false);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -107,13 +118,19 @@ export function ExportSurvey() {
             <iframe height="300px" width="320px" title="survey" src={"/Survey/" + id}/>
 
             <div className={classes.privacyContainer}>
-                <Button onClick={() => setButtonPopUp(true)} variant="contained" color="default" endIcon={<HelpIcon/>}  > Privacy</Button>
-                <PopUp trigger={buttonPopUp} setTrigger={setButtonPopUp}>
-                    <p id="popup-text">A data processing agreement (DPA) between you and the website owner mentioning SurvHey as sub-contractor is necessary. A DPA between you and SurvHey is necessary as well. The website owner is responsible for consent banners. For further information see GDPR, especially Art.28 </p>
-                </PopUp>
+                <Button onClick={() => {setPrivacyModal(true)}} variant="contained" color="default" endIcon={<HelpIcon/>} >Privacy</Button>
+                <Modal
+                open={privacyModal}
+                onClose={() => setPrivacyModal(false)}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                >
+                    <div className={classes.privacyPaper}>
+                        <Typography variant="h4">Privacy Statement - SurvHey</Typography>
+                        <Typography>A data processing agreement (DPA) between you and the website owner mentioning SurvHey as sub-contractor is necessary. A DPA between you and SurvHey is necessary as well. The website owner is responsible for consent banners. For further information see GDPR, especially Art.28</Typography>
+                    </div>
+                </Modal>
             </div>
-
-
 
             <Fab onClick={handleClick} size="medium" color="secondary" aria-label="add" className={classes.fab}>
                 <Typography variant="h5">?</Typography>
