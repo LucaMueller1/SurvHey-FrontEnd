@@ -35,6 +35,8 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+    backgroundColor: "#121212",
+    color: "white"
   },
   image: {
     backgroundImage: 'url('+Logo+')',
@@ -49,10 +51,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -85,9 +88,9 @@ export default function SignInSide() {
         }
     }).catch(error => {
       console.log("Error during authentication");
+      setWrongCred(true);
       if(error.response && error.response.status === 403) {
         console.log("Wrong username or password");
-        setWrongCred(true);
       }
     })
   };
@@ -198,7 +201,7 @@ if(registered === false){
               </Button>
               <Grid container>
               <Grid item>
-                <Button variant="contained" color="primary" onClick={onBacktoLogin}>
+                <Button variant="outlined" color="secondary" onClick={onBacktoLogin}>
                     Already registered? Login here
                 </Button>  
               </Grid>
@@ -214,7 +217,7 @@ if(registered === false){
 }
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid  container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -266,7 +269,7 @@ if(registered === false){
             </Button>
             <Grid>
               <Grid item>
-                <Button variant="contained" color="primary" onClick={onRegister}>
+                <Button variant="outlined" color="secondary" onClick={onRegister}>
                     Create Account
                 </Button>  
               </Grid>

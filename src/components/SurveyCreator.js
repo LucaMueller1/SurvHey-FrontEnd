@@ -1,22 +1,20 @@
 import React from 'react';
 import { requestService } from '../services/requestService';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import { AuthInterceptor } from '../services/AuthInterceptor';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { SketchPicker } from 'react-color'
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider';
-
-
-
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -55,8 +53,8 @@ class SurveyCreator extends React.Component {
       selectedOption: "",
       backgroundColor: '#fff',
       accentColor: '#fff',
-      optionText: ""
-     
+      optionText: "",
+      anchorHelp: null
     };
     this.formSubmit = this.formSubmit.bind(this);
     this.onChangeSurveyName = this.onChangeSurveyName.bind(this);
@@ -66,6 +64,8 @@ class SurveyCreator extends React.Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.onSurveyTypeChange = this.onSurveyTypeChange.bind(this);
     this.onChangeOption = this.onChangeOption.bind(this);
+    this.onAnchorHelpChange = this.onAnchorHelpChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
   
   
@@ -82,12 +82,23 @@ class SurveyCreator extends React.Component {
     });
   }
 
-
   onSurveyTypeChange(event){
     this.setState({
       selectedSurveyType: event.target.value
     });
     console.log(event.target.value)
+  }
+
+  onAnchorHelpChange(event) {
+    this.setState({
+      anchorHelp: event.currentTarget
+    });
+  }
+
+  handleClose() {
+    this.setState({
+      anchorHelp: null
+    });
   }
 
   onValueChange(event) {
@@ -112,7 +123,8 @@ class SurveyCreator extends React.Component {
     this.setState({
         surveyName: event.target.value
     })
-}
+  }
+  
   onChangeQuestionText(event) {
     this.setState({
       questionText: event.target.value
@@ -234,13 +246,33 @@ class SurveyCreator extends React.Component {
           <MenuItem value={"radio"}>Radio</MenuItem>
           <MenuItem value={"check"}>Checkbox</MenuItem>
         </Select>
-        
+        <IconButton onClick={this.onAnchorHelpChange} style={{marginBottom: "4%"}}><HelpOutlineIcon/></IconButton>
+
+        <Popover
+        open={Boolean(this.state.anchorHelp)}
+        anchorEl={this.state.anchorHelp}
+        onClose={this.handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        >
+                <Box p={1} className={classes.popoverBox} textAlign="center">
+                    <Typography>Radio button: single choice</Typography>
+                    <Typography>Checkbox: multiple choice</Typography>
+                </Box>
+            </Popover>
+
         <div style={{marginTop:"10%"}}>
         <Button color="primary" onClick={this.goBack}>go back</Button>
         <Button variant="contained" color="primary" onClick={this.switchPhase}>Continue</Button>
         </div>
         </Card>
-              </div>
+        </div>
      
     );}
 
