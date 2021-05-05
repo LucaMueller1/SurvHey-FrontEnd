@@ -1,6 +1,6 @@
-# SurvHey Front-End
+# SurvHey FrontEnd
 
-This is the Front-End of the awesome SurvHey project.
+This is the FrontEnd of the awesome SurvHey project.
 
 ## Run with NGINX Webserver in Docker
 ```sh
@@ -8,6 +8,7 @@ docker build -t survhey-frontend .
 docker run -d --name survhey-frontend -p 80:80 survhey-frontend
 ```
 The webserver is available under localhost in your browser.
+The FrontEnd is included in the multi-container Docker stack in the [SurvHey-Delivery](https://git.dhbw-stuttgart.de/survhey/survhey-delivery) repository.
 
 ## Available Scripts
 
@@ -46,32 +47,4 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Image of SurvHey Website](https://i.ibb.co/SdyWXdp/Screenshot-2021-05-05-at-17-05-42.png)
