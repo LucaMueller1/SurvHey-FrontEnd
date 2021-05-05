@@ -15,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { LocalGasStation, SentimentSatisfiedTwoTone } from '@material-ui/icons';
 import { requestService } from '../services/requestService';
 import { AuthService} from '../services/authService';
+import Logo from '../media/SurvHey.png';
+
 
 
 function Copyright() {
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://images.pexels.com/photos/372748/pexels-photo-372748.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)',
+    backgroundImage: 'url('+Logo+')',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
