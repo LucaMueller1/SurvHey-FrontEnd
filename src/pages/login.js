@@ -35,8 +35,6 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-    backgroundColor: "#121212",
-    color: "white"
   },
   image: {
     backgroundImage: 'url('+Logo+')',
@@ -64,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  inputField: {
+    color:"white"
+  }
 }));
 
 export default function SignInSide() {
@@ -136,7 +137,7 @@ if(registered === false){
         <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid style={{backgroundColor: "#f5f5f5"}} item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
@@ -156,6 +157,7 @@ if(registered === false){
                 name="email"
                 autoComplete="email"
                 autoFocus
+                inputProps={{style:{height:"2em"}}}
                 onChange={onEmailChange}
               />
               <TextField
@@ -175,8 +177,9 @@ if(registered === false){
                 margin="normal"
                 required
                 fullWidth
+                inputProps={{style:{height:"2em"}}}
                 name="lastName"
-                label="lastName"
+                label="Last Name"
                 id="lastName"
                 onChange={onLastNameChange}
               />
@@ -185,8 +188,9 @@ if(registered === false){
                 margin="normal"
                 required
                 fullWidth
+                inputProps={{style:{height:"2em"}}}
                 name="firstName"
-                label="firstName"
+                label="First Name"
                 id="firstName"
                 onChange={onFirstNameChange}
               />
@@ -201,7 +205,7 @@ if(registered === false){
               </Button>
               <Grid container>
               <Grid item>
-                <Button variant="outlined" color="secondary" onClick={onBacktoLogin}>
+                <Button variant="outlined" color="secondary" onClick={onBacktoLogin} align="center">
                     Already registered? Login here
                 </Button>  
               </Grid>
@@ -220,7 +224,7 @@ if(registered === false){
     <Grid  container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid style={{backgroundColor: "#f5f5f5"}} item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -234,12 +238,15 @@ if(registered === false){
               margin="normal"
               required
               fullWidth
+              fullHeight
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
+              inputProps={{style:{height:"2em"}}}
               onChange={onEmailChange}
+
             />
             <TextField
               error={wrongCred}
@@ -247,6 +254,7 @@ if(registered === false){
               margin="normal"
               required
               fullWidth
+              fullHeight
               name="password"
               label="Password"
               type="password"
