@@ -8,7 +8,7 @@ docker build -t survhey-frontend .
 docker run -d --name survhey-frontend -p 80:80 survhey-frontend
 ```
 The webserver is available under localhost in your browser.
-The FrontEnd is included in the multi-container Docker stack in the [SurvHey-Delivery](https://git.dhbw-stuttgart.de/survhey/survhey-delivery) repository.
+The FrontEnd is included in the multi-container Docker stack in the [SurvHey](https://github.com/LucaMueller1/SurvHey) repository.
 
 ## Available Scripts
 
